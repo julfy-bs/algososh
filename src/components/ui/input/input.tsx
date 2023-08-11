@@ -1,43 +1,43 @@
-import React from "react";
-import styles from "./input.module.css";
+import { HTMLProps } from 'react';
+import styles from './input.module.css';
 
-interface InputProps extends React.HTMLProps<HTMLInputElement> {
+type InputProps = {
   placeholder?: string;
   extraClass?: string;
   isLimitText?: boolean;
 }
 
-export const Input: React.FC<InputProps> = ({
-  placeholder = "Введите текст",
-  extraClass = "",
-  type = "text",
-  maxLength,
-  max,
-  isLimitText = false,
-  ...rest
-}) => {
+export const Input = ({
+                        placeholder = 'Введите текст',
+                        extraClass = '',
+                        type = 'text',
+                        maxLength,
+                        max,
+                        isLimitText = false,
+                        ...rest
+                      }: InputProps & HTMLProps<HTMLInputElement>) => {
   const limitText =
-    type === "text"
-      ? `Максимум — ${maxLength} символа`
-      : `Максимальное число — ${max}`;
-
+    type === 'text'
+      ? `Максимум — ${ maxLength } символов`
+      : `Максимальное число — ${ max }`;
+  // `Максимум — ${ maxLength } символов` в файле строки
   return (
-    <div className={`${styles.content} ${extraClass}`}>
+    <div className={ `${ styles.content } ${ extraClass }` }>
       <input
-        className={`${styles.input} text text_type_input text_color_input`}
-        placeholder={placeholder}
-        type={type}
-        maxLength={maxLength}
-        max={max}
-        {...rest}
+        className={ `${ styles.input } text text_type_input text_color_input` }
+        placeholder={ placeholder }
+        type={ type }
+        maxLength={ maxLength }
+        max={ max }
+        { ...rest }
       />
-      {isLimitText && (
+      { isLimitText && (
         <span
-          className={`text text_type_input-lim text_color_input mt-2 ml-8 ${styles.limit}`}
+          className={ `text text_type_input-lim text_color_input mt-2 ml-8 ${ styles.limit }` }
         >
-          {limitText}
+          { limitText }
         </span>
-      )}
+      ) }
     </div>
   );
 };

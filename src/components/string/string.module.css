@@ -1,0 +1,24 @@
+.form {
+  align-self: center;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 120px;
+  max-width: 522px;
+  width: 100%;
+}
+
+.wrapper {
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  max-width: 1040px;
+}
+
+@media screen and (max-width: 1080px) {
+  .wrapper {
+  }
+}
+
+
