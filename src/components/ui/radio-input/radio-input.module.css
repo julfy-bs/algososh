@@ -1,3 +1,11 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
 .input {
   display: none;
   transition: var(--common-transition);
