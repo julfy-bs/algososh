@@ -16,11 +16,7 @@ export const Input = ({
                         isLimitText = false,
                         ...rest
                       }: InputProps & HTMLProps<HTMLInputElement>) => {
-  const limitText =
-    type === 'text'
-      ? `Максимум — ${ maxLength } символов`
-      : `Максимальное число — ${ max }`;
-  // `Максимум — ${ maxLength } символов` в файле строки
+
   return (
     <div className={ `${ styles.content } ${ extraClass }` }>
       <input
@@ -31,13 +27,24 @@ export const Input = ({
         max={ max }
         { ...rest }
       />
-      { isLimitText && (
-        <span
-          className={ `text text_type_input-lim text_color_input mt-2 ml-8 ${ styles.limit }` }
-        >
-          { limitText }
-        </span>
-      ) }
+      {
+        maxLength && (
+          <span
+            className={ `text text_type_input-lim text_color_input mt-2 ml-8 ${ styles.limit }` }
+          >
+            { `Максимум — ${ maxLength } символов` }
+          </span>
+        )
+      }
+      {
+        max &&(
+          <span
+            className={ `text text_type_input-lim text_color_input mt-2 ml-8 ${ styles.limit }` }
+          >
+            { `Максимальное число — ${ max }` }
+          </span>
+        )
+      }
     </div>
   );
 };
