@@ -1,13 +1,12 @@
 import { ChangeEventHandler, FormEventHandler, useState } from 'react';
-import styles from './string.module.css';
+import styles from './string-page.module.css';
 import { SolutionLayout } from '../ui/solution-layout/solution-layout';
 import { Input } from '../ui/input/input';
 import { Circle } from '../ui/circle/circle';
 import { Button } from '../ui/button/button';
-import { sleep } from '../../helpers/sleep';
 import { changeCircleColor } from './utils';
 import { nanoid } from 'nanoid';
-import { swap } from '../../helpers/swap';
+import { reverseString } from './utils/reverseString';
 
 export const StringComponent = () => {
   const [value, setValue] = useState<string>('');
@@ -19,24 +18,6 @@ export const StringComponent = () => {
   const [pointerFirst, setPointerFirst] = useState<number>(0);
   const [pointerSecond, setPointerSecond] = useState<number>(0);
 
-  const reverseString = async () => {
-    setIsFormSubmitted(true);
-    setIsCircleVisible(true);
-    let start = 0;
-    let end = valuesArray.length - 1;
-    while (start < end) {
-      setPointerFirst(start);
-      setPointerSecond(end);
-      await sleep(1000);
-      swap(valuesArray, start, end);
-      setValuesArray(valuesArray);
-      start++;
-      end--;
-    }
-    setPointerFirst(valuesArray.length);
-    setPointerSecond(valuesArray.length);
-    setIsFormSubmitted(false);
-  };
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const target = e.currentTarget.value;
@@ -50,7 +31,14 @@ export const StringComponent = () => {
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     setValue('');
-    await reverseString();
+    await reverseString(
+      setIsFormSubmitted,
+      setIsCircleVisible,
+      setPointerFirst,
+      setPointerSecond,
+      valuesArray,
+      setValuesArray
+    );
   };
 
   return (

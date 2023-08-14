@@ -19,3 +19,9 @@ export type SortElement = {
   value: number;
   state: ElementStatesVariety;
 }
+
+export type SortOptions = {
+  array: SortElement[];
+  direction: SortDirection;
+  type: SortType;
+}

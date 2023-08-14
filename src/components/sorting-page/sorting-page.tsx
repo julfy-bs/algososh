@@ -5,128 +5,44 @@ import { Button } from '../ui/button/button';
 import { RadioInput } from '../ui/radio-input/radio-input';
 import { Column } from '../ui/column/column';
 import { Direction, SortDirection, SortElement, SortType, Type } from '../../types/sort';
-import { randomArr } from './utils';
-import { ElementStates, ElementStatesVariety } from '../../types/element-states';
-import { sleep } from '../../helpers/sleep';
-import { swap } from '../../helpers/swap';
+import { createRandomArray } from './utils/createRandomArray';
+import { startSorting } from './utils/startSorting';
 
-type SortOptions = {
-  array: SortElement[];
-  direction: SortDirection;
-  type: SortType;
-}
 
 export const SortingPage = () => {
   const [sortType, setSortType] = useState<SortType>(Type.Selection);
-  const [sortDirection, setSortDirection] = useState<SortDirection>();
+  const [sortDirection, setSortDirection] = useState<SortDirection>(Direction.Ascending);
   const [sortArray, setSortArray] = useState<SortElement[]>([]);
   const [isSortInProgress, setIsSortInProgress] = useState<boolean>(false);
 
-  const changeColor = (element: SortElement, color: ElementStatesVariety): SortElement => {
-    return {
-      ...element,
-      state: color
-    };
-  };
-
-  const bubbleSort = ({
-                        array,
-                        direction
-                      }: Omit<SortOptions, 'type'>): SortElement[][] => {
-    let copyArray: SortElement[] = [...array];
-    let arraySortingMap: SortElement[][] = [];
-    for (let j = copyArray!.length - 1; j >= 0; j--) {
-      for (let i = 0; i < j; i++) {
-        copyArray[i] = changeColor(copyArray[i], ElementStates.Changing);
-        copyArray[i + 1] = changeColor(copyArray[i + 1], ElementStates.Changing);
-        arraySortingMap.push([...copyArray]);
-        if (direction === Direction.Descending && copyArray[i].value < copyArray[i + 1].value) {
-          swap(copyArray, i, i + 1);
-          arraySortingMap.push([...copyArray]);
-        }
-        if (direction === Direction.Ascending && copyArray[i].value > copyArray[i + 1].value) {
-          swap(copyArray, i, i + 1);
-          arraySortingMap.push([...copyArray]);
-        }
-        copyArray[i] = changeColor(copyArray[i], ElementStates.Default);
-        copyArray[i + 1] = changeColor(copyArray[i + 1], ElementStates.Default);
-        arraySortingMap.push([...copyArray]);
-      }
-      copyArray[j] = changeColor(copyArray[j], ElementStates.Modified);
-      arraySortingMap.push([...copyArray]);
-    }
-    return arraySortingMap;
-  };
-
-  const selectionSort = ({
-                           array,
-                           direction
-                         }: Omit<SortOptions, 'type'>): SortElement[][] => {
-    let copyArray: SortElement[] = [...array];
-    let arraySortingMap: SortElement[][] = [];
-    const { length } = copyArray;
-    for (let i = 0; i < length; i++) {
-      let target = i;
-      for (let j = i + 1; j < length; j++) {
-        copyArray[target] = changeColor(copyArray[target], ElementStates.Changing);
-        copyArray[j] = changeColor(copyArray[j], ElementStates.Changing);
-        arraySortingMap.push([...copyArray]);
-        if (direction === Direction.Descending && copyArray[j].value > copyArray[target].value) {
-          swap(copyArray, target, j);
-          arraySortingMap.push([...copyArray]);
-        }
-        if (direction === Direction.Ascending && copyArray[j].value < copyArray[target].value) {
-          swap(copyArray, target, j);
-          arraySortingMap.push([...copyArray]);
-        }
-        copyArray[target] = changeColor(copyArray[target], ElementStates.Default);
-        copyArray[j] = changeColor(copyArray[j], ElementStates.Default);
-        arraySortingMap.push([...copyArray]);
-      }
-      copyArray[target] = changeColor(copyArray[target], ElementStates.Modified);
-      arraySortingMap.push([...copyArray]);
-    }
-    return arraySortingMap;
-  };
-  const startSorting = async (sortOptions: SortOptions) => {
-    setIsSortInProgress(true);
-    let index = 0;
-    let arraySortingMap: SortElement[][];
-
-    (sortOptions.type === Type.Selection)
-      ? arraySortingMap = selectionSort(sortOptions)
-      : arraySortingMap = bubbleSort(sortOptions);
-
-    while (index < arraySortingMap.length) {
-      setSortArray(arraySortingMap[index]);
-      await sleep(400);
-      index++;
-    }
-    setIsSortInProgress(false);
-  };
-
-
   const handleAscending = async () => {
     setSortDirection(Direction.Ascending);
-    await startSorting({
-      array: sortArray,
-      direction: Direction.Ascending,
-      type: sortType
-    });
+    await startSorting(
+      {
+        array: sortArray,
+        direction: Direction.Ascending,
+        type: sortType
+      },
+      setIsSortInProgress,
+      setSortArray
+    );
   };
 
   const handleDescending = async () => {
     setSortDirection(Direction.Descending);
-    await startSorting({
-      array: sortArray,
-      direction: Direction.Descending,
-      type: sortType
-    });
+    await startSorting(
+      {
+        array: sortArray,
+        direction: Direction.Descending,
+        type: sortType
+      },
+      setIsSortInProgress,
+      setSortArray
+    );
   };
 
   const handleCreateRandomArrayButton: ReactEventHandler<HTMLButtonElement> = () => {
-    const newArray = randomArr({ maxLength: 17 });
-    setSortArray(newArray);
+    setSortArray(createRandomArray());
   };
 
   return (

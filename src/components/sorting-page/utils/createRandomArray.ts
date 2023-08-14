@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
-import { ElementStates } from '../../types/element-states';
-import { SortElement } from '../../types/sort';
+import { ElementStates } from '../../../types/element-states';
+import { SortElement } from '../../../types/sort';
 
 type Options = {
   minLength?: number;
@@ -9,12 +9,12 @@ type Options = {
   maxValue?: number;
 }
 
-const randomArr = ({
-                     minLength = 3,
-                     maxLength = 17,
-                     minValue = 0,
-                     maxValue = 100
-                   }: Options = {}): SortElement[] => {
+const createRandomArray = ({
+                             minLength = 3,
+                             maxLength = 17,
+                             minValue = 0,
+                             maxValue = 100
+                           }: Options = {}): SortElement[] => {
   const array = [];
   const randomLength = Math.round(Math.random() * (maxLength - minLength) + minLength);
   for (let i = 0; i < randomLength; i++) {
@@ -29,4 +29,4 @@ const randomArr = ({
   return array;
 };
 
-export { randomArr };
+export { createRandomArray };
