@@ -1,0 +1,52 @@
+.form {
+  align-self: center;
+  justify-content: space-between;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 48px;
+  max-width: 829px;
+  width: 100%;
+}
+
+.form_fieldset {
+  width: 100%;
+  border: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.form_fieldset_type_input {
+  max-width: 337px;
+  width: 100%;
+}
+
+.form_fieldset_type_button {
+  max-width: 707px;
+  gap: 0;
+}
+
+.form_input {
+
+}
+
+.form_button {
+  width: 100%;
+  max-width: 121px;
+  padding: 18px 24px;
+  box-sizing: border-box;
+}
+
+.form_button:last-child {
+  margin-left: auto;
+}
+
+.wrapper {
+  align-self: center;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 64px 16px;
+  max-width: 944px;
+}
