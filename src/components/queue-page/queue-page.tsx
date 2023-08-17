@@ -13,7 +13,7 @@ import { sleep } from '../../helpers/sleep';
 
 export const QueuePage = () => {
   const [value, setValue] = useState<string>('');
-  const [queueSettings, setQueueSettings] = useState<QueueSettings>({
+  const [queueSettings, setQueueSettings] = useState<QueueSettings<string>>({
     array: [],
     head: 0,
     tail: 0
@@ -21,7 +21,7 @@ export const QueuePage = () => {
   const [queueSize] = useState<number>(7);
   const [solutionState, setSolutionState] = useState<SolutionState>(SolutionStateVariety.Empty);
   const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
-  const queue = useMemo(() => new Queue(queueSize), []);
+  const queue = useMemo(() => new Queue<string>(queueSize), []);
 
   useEffect(() => {
     setQueueSettings({

@@ -37,7 +37,7 @@ export const Input = ({
         )
       }
       {
-        max &&(
+        max && (
           <span
             className={ `text text_type_input-lim text_color_input mt-2 ml-8 ${ styles.limit }` }
           >

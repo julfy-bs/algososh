@@ -1,5 +1,5 @@
-export type QueueSettings = {
-  array: string[];
+export type QueueSettings<T> = {
+  array: (T | string)[];
   head: number;
   tail: number;
 }

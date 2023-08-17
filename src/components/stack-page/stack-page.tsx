@@ -14,7 +14,7 @@ import { sleep } from '../../helpers/sleep';
 
 export const StackPage = () => {
   const [value, setValue] = useState<string>('');
-  const [stackSettings, setStackSettings] = useState<StackSettings>({
+  const [stackSettings, setStackSettings] = useState<StackSettings<string>>({
     array: [],
   });
   const [solutionState, setSolutionState] = useState<SolutionState>(SolutionStateVariety.Empty);
@@ -22,7 +22,7 @@ export const StackPage = () => {
   const isCircleVisible = useMemo(() => {
     return stackSettings.array.length > 0;
   }, [stackSettings.array]);
-  const stack = React.useMemo(() => new Stack(), []);
+  const stack = React.useMemo(() => new Stack<string>(), []);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setValue(e.currentTarget.value);
@@ -32,7 +32,7 @@ export const StackPage = () => {
     e.preventDefault();
     setIsFormSubmitting(true);
     setSolutionState(SolutionStateVariety.Add);
-    const options: StackSettings = stack.push(value);
+    const options: StackSettings<string> = stack.push(value);
     setStackSettings(options);
     await sleep(1000);
     setValue('');

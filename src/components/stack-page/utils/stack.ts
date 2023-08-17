@@ -1,30 +1,30 @@
 import { StackSettings } from '../../../types/stack';
 
-type StackClass = {
-  push: (value: string) => StackSettings;
-  pop: () => StackSettings;
-  clear: () => StackSettings;
+type StackClass<T> = {
+  push: (value: T) => StackSettings<T>;
+  pop: () => StackSettings<T>;
+  clear: () => StackSettings<T>;
 }
 
-export class Stack implements StackClass {
-  private stackArray: string[] = [];
+export class Stack<T> implements StackClass<T> {
+  private stackArray: T[] = [];
 
-  push(value: string): StackSettings {
+  push(value: T): StackSettings<T> {
     this.stackArray.push(value);
     return this.returnStackData();
   }
 
-  pop(): StackSettings {
+  pop(): StackSettings<T> {
     this.stackArray.pop();
     return this.returnStackData();
   }
 
-  clear(): StackSettings {
+  clear(): StackSettings<T> {
     this.stackArray = [];
     return this.returnStackData();
   }
 
-  private returnStackData(): StackSettings {
+  private returnStackData(): StackSettings<T> {
     return {
       array: this.stackArray
     };

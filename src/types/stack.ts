@@ -1,3 +1,3 @@
-export type StackSettings = {
-  array: string[];
+export type StackSettings<T> = {
+  array: T[];
 }

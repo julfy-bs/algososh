@@ -1,15 +1,15 @@
 import { QueueSettings } from '../../../types/queue';
 
-type QueueClass = {
-  enqueue: (value: string) => QueueSettings;
-  dequeue: () => QueueSettings;
-  clear: () => QueueSettings;
-  getElements: () => Array<string>;
+type QueueClass<T> = {
+  enqueue: (value: T) => QueueSettings<T>;
+  dequeue: () => QueueSettings<T>;
+  clear: () => QueueSettings<T>;
+  getElements: () => (T | string)[];
   getLength: () => number;
 }
 
-export class Queue implements QueueClass {
-  private queueArray: (string)[] = [];
+export class Queue<T> implements QueueClass<T> {
+  private queueArray: (T | string)[] = [];
   private head = 0;
   private tail = 0;
   private readonly size: number = 0;
@@ -20,7 +20,7 @@ export class Queue implements QueueClass {
     this.queueArray = this.createInitialArray(size);
   }
 
-  enqueue(value: string): QueueSettings {
+  enqueue(value: T): QueueSettings<T> {
     if (this.length === this.size) this.returnQueueData();
     if (this.tail === this.size) this.tail = 0;
     this.queueArray[this.tail] = value;
@@ -29,7 +29,7 @@ export class Queue implements QueueClass {
     return this.returnQueueData();
   }
 
-  dequeue(): QueueSettings {
+  dequeue(): QueueSettings<T> {
     if (this.length === 0) this.returnQueueData();
     this.queueArray[this.head % this.size] = '';
     this.length--;
@@ -38,7 +38,7 @@ export class Queue implements QueueClass {
     return this.returnQueueData();
   }
 
-  clear(): QueueSettings {
+  clear(): QueueSettings<T> {
     this.queueArray = this.createInitialArray(this.size);
     this.length = 0;
     this.head = 0;
@@ -46,7 +46,7 @@ export class Queue implements QueueClass {
     return this.returnQueueData();
   }
 
-  getElements(): Array<string> {
+  getElements(): (T | string)[] {
     return this.queueArray;
   };
 
@@ -54,7 +54,7 @@ export class Queue implements QueueClass {
     return this.length;
   };
 
-  private returnQueueData(): QueueSettings {
+  private returnQueueData(): QueueSettings<T> {
     return {
       array: this.queueArray,
       head: this.head,
