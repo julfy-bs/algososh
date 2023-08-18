@@ -5,8 +5,10 @@ import { Input } from '../ui/input/input';
 import { Circle } from '../ui/circle/circle';
 import { Button } from '../ui/button/button';
 import { changeCircleColor } from './utils';
-import { nanoid } from 'nanoid';
-import { reverseString } from './utils/reverseString';
+import { sleep } from '../../helpers/sleep';
+import { swap } from '../../helpers/swap';
+import { INPUT_MAX_LENGTH_STRING } from '../../constants/algorithmsRules';
+import { DELAY_IN_MS } from '../../constants/delays';
 
 export const StringComponent = () => {
   const [value, setValue] = useState<string>('');
@@ -30,15 +32,23 @@ export const StringComponent = () => {
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
+    setIsFormSubmitted(true);
+    setIsCircleVisible(true);
     setValue('');
-    await reverseString(
-      setIsFormSubmitted,
-      setIsCircleVisible,
-      setPointerFirst,
-      setPointerSecond,
-      valuesArray,
-      setValuesArray
-    );
+    let start = 0;
+    let end = valuesArray.length - 1;
+    while (start < end) {
+      setPointerFirst(start);
+      setPointerSecond(end);
+      await sleep(DELAY_IN_MS);
+      swap(valuesArray, start, end);
+      setValuesArray(valuesArray);
+      start++;
+      end--;
+    }
+    setPointerFirst(valuesArray.length);
+    setPointerSecond(valuesArray.length);
+    setIsFormSubmitted(false);
   };
 
   return (
@@ -47,7 +57,7 @@ export const StringComponent = () => {
         <Input
           value={ value }
           disabled={ isFormSubmitted }
-          maxLength={ 11 }
+          maxLength={ INPUT_MAX_LENGTH_STRING }
           isLimitText={ true }
           extraClass={ styles.input_for_string }
           onChange={ handleChange }
@@ -68,7 +78,7 @@ export const StringComponent = () => {
                 <Circle
                   state={ changeCircleColor(pointerFirst, pointerSecond, index) }
                   letter={ item }
-                  key={ nanoid() }
+                  key={ index }
                 />
               ))
             : (<></>)

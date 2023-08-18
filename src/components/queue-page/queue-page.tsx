@@ -1,15 +1,17 @@
-import React, { ChangeEventHandler, FormEventHandler, ReactEventHandler, useEffect, useMemo, useState } from 'react';
+import { ChangeEventHandler, FormEventHandler, ReactEventHandler, useEffect, useMemo, useState } from 'react';
 import { SolutionLayout } from '../ui/solution-layout/solution-layout';
-import styles from './queue-page.module.css';
 import { Input } from '../ui/input/input';
 import { Button } from '../ui/button/button';
-import { Queue } from './utils/queue';
 import { Circle } from '../ui/circle/circle';
-import { nanoid } from 'nanoid';
+import { sleep } from '../../helpers/sleep';
+import { Queue } from './utils/queue';
 import { ElementStates, ElementStatesVariety } from '../../types/element-states';
 import { QueueSettings } from '../../types/queue';
 import { SolutionState, SolutionStateVariety } from '../../types/solution';
-import { sleep } from '../../helpers/sleep';
+import { DELAY_IN_MS } from '../../constants/delays';
+import { INPUT_MAX_LENGTH_QUEUE, ARRAY_DEFAULT_SIZE_QUEUE } from '../../constants/algorithmsRules';
+import styles from './queue-page.module.css';
+import { HEAD, TAIL } from '../../constants/element-captions';
 
 export const QueuePage = () => {
   const [value, setValue] = useState<string>('');
@@ -18,7 +20,7 @@ export const QueuePage = () => {
     head: 0,
     tail: 0
   });
-  const [queueSize] = useState<number>(7);
+  const [queueSize] = useState<number>(ARRAY_DEFAULT_SIZE_QUEUE);
   const [solutionState, setSolutionState] = useState<SolutionState>(SolutionStateVariety.Empty);
   const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
   const queue = useMemo(() => new Queue<string>(queueSize), []);
@@ -41,7 +43,7 @@ export const QueuePage = () => {
     const options = await queue.enqueue(value);
     setValue('');
     setQueueSettings(options);
-    await sleep(1000);
+    await sleep(DELAY_IN_MS);
     setSolutionState(SolutionStateVariety.Empty);
     setIsFormSubmitting(false);
   };
@@ -49,7 +51,7 @@ export const QueuePage = () => {
   const handleDeleteFromStack: ReactEventHandler<HTMLButtonElement> = async (): Promise<void> => {
     setIsFormSubmitting(true);
     setSolutionState(SolutionStateVariety.Delete);
-    await sleep(1000);
+    await sleep(DELAY_IN_MS);
     const options = await queue.dequeue();
     setQueueSettings(options);
     setSolutionState(SolutionStateVariety.Empty);
@@ -59,7 +61,7 @@ export const QueuePage = () => {
   const handleClearValuesArray: ReactEventHandler<HTMLButtonElement> = async (): Promise<void> => {
     setIsFormSubmitting(true);
     setSolutionState(SolutionStateVariety.Clear);
-    await sleep(1000);
+    await sleep(DELAY_IN_MS);
     const options = await queue.clear();
     setQueueSettings(options);
     setSolutionState(SolutionStateVariety.Empty);
@@ -86,9 +88,8 @@ export const QueuePage = () => {
           <Input
             disabled={ isFormSubmitting || queueSize === queue.getLength() }
             value={ value }
-            maxLength={ 4 }
+            maxLength={ INPUT_MAX_LENGTH_QUEUE }
             onChange={ handleChange }
-            tabIndex={ 0 }
           />
         </fieldset>
         <fieldset className={ `${ styles.form_fieldset } ${ styles.form_fieldset_type_button }` }>
@@ -125,12 +126,12 @@ export const QueuePage = () => {
                 state={ findState(item, index) }
                 letter={ item }
                 index={ index }
-                key={ nanoid() }
+                key={ index }
                 head={ item && queueSettings.head === index
-                  ? 'head'
+                  ? HEAD
                   : '' }
                 tail={ item && queueSettings.tail - 1 === index
-                  ? 'tail'
+                  ? TAIL
                   : '' }
               />
             ))

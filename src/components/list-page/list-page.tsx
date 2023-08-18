@@ -1,15 +1,18 @@
-import { useEffect, useMemo, useState } from 'react';
+import { ReactEventHandler, useEffect, useMemo, useState } from 'react';
 import { SolutionLayout } from '../ui/solution-layout/solution-layout';
-import styles from './list-page.module.css';
 import { Input } from '../ui/input/input';
 import { Button } from '../ui/button/button';
-import { LinkedList, LinkedListNode } from './utils/linkedList';
 import { ArrowIcon } from '../ui/icons/arrow-icon';
 import { Circle } from '../ui/circle/circle';
-import { nanoid } from 'nanoid';
-import { ElementStates, ElementStatesVariety } from '../../types/element-states';
 import { sleep } from '../../helpers/sleep';
+import { LinkedList, LinkedListNode } from './utils/linkedList';
+import { ElementStates, ElementStatesVariety } from '../../types/element-states';
 import { LinkedListState, LinkedListStateVariety } from '../../types/linkedList';
+import { INITIAL_ARRAY_LINKED_LIST, INPUT_MAX_LENGTH_LINKED_LIST, LIST_MAX_LENGTH_LINKED_LIST, LIST_MIN_INDEX_LINKED_LIST } from '../../constants/algorithmsRules';
+import { DELAY_IN_MS, SHORT_DELAY_IN_MS } from '../../constants/delays';
+import { COLOR_CHANGING, COLOR_DEFAULT } from '../../constants/colors';
+import { HEAD, TAIL } from '../../constants/element-captions';
+import styles from './list-page.module.css';
 
 export const ListPage = () => {
   const [inputValue, setInputValue] = useState<string>('');
@@ -20,7 +23,7 @@ export const ListPage = () => {
 
   const [solutionState, setSolutionState] = useState<LinkedListState>(LinkedListStateVariety.Empty);
   const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
-  const [initialArray] = useState<string[]>(['0', '34', '8', '1']);
+  const [initialArray] = useState<string[]>(INITIAL_ARRAY_LINKED_LIST);
   const list = useMemo(() => new LinkedList<string>(), []);
 
   useEffect(() => {
@@ -29,44 +32,44 @@ export const ListPage = () => {
     setArray(arrayFromLinkedList);
   }, []);
 
-  const handleAddNewHead = async () => {
+  const handleAddNewHead: ReactEventHandler<HTMLButtonElement> = async () => {
     setIsFormSubmitting(true);
     setSolutionState(LinkedListStateVariety.AddToHead);
     setChangingIndex(0);
-    await sleep(500);
+    await sleep(SHORT_DELAY_IN_MS);
     list.prepend(inputValue);
     const arrayFromLinkedList = list.toArray();
     setArray(arrayFromLinkedList);
     setSolutionState(LinkedListStateVariety.Success);
-    await sleep(500);
+    await sleep(SHORT_DELAY_IN_MS);
     setInputValue('');
     setChangingIndex(null);
     setSolutionState(LinkedListStateVariety.Empty);
     setIsFormSubmitting(false);
   };
 
-  const handleAddNewTail = async () => {
+  const handleAddNewTail: ReactEventHandler<HTMLButtonElement> = async () => {
     setIsFormSubmitting(true);
     setSolutionState(LinkedListStateVariety.AddToTail);
     setChangingIndex(array.length - 1);
-    await sleep(500);
+    await sleep(SHORT_DELAY_IN_MS);
     setChangingIndex(array.length);
     list.append(inputValue);
     const arrayFromLinkedList = list.toArray();
     setArray(arrayFromLinkedList);
     setSolutionState(LinkedListStateVariety.Success);
-    await sleep(500);
+    await sleep(SHORT_DELAY_IN_MS);
     setInputValue('');
     setChangingIndex(null);
     setSolutionState(LinkedListStateVariety.Empty);
     setIsFormSubmitting(false);
   };
 
-  const handleDeleteHead = async () => {
+  const handleDeleteHead: ReactEventHandler<HTMLButtonElement> = async () => {
     setIsFormSubmitting(true);
     setSolutionState(LinkedListStateVariety.DeleteFromHead);
     setChangingIndex(0);
-    await sleep(1000);
+    await sleep(DELAY_IN_MS);
     list.deleteHead();
     const arrayFromLinkedList = list.toArray();
     setArray(arrayFromLinkedList);
@@ -75,11 +78,11 @@ export const ListPage = () => {
     setIsFormSubmitting(false);
   };
 
-  const handleDeleteTail = async () => {
+  const handleDeleteTail: ReactEventHandler<HTMLButtonElement> = async () => {
     setIsFormSubmitting(true);
     setSolutionState(LinkedListStateVariety.DeleteFromTail);
     setChangingIndex(array.length - 1);
-    await sleep(1000);
+    await sleep(DELAY_IN_MS);
     list.deleteTail();
     const arrayFromLinkedList = list.toArray();
     setArray(arrayFromLinkedList);
@@ -88,7 +91,7 @@ export const ListPage = () => {
     setIsFormSubmitting(false);
   };
 
-  const handleAddByIndex = async () => {
+  const handleAddByIndex: ReactEventHandler<HTMLButtonElement> = async () => {
     setIsFormSubmitting(true);
     setSolutionState(LinkedListStateVariety.AddByIndex);
     const addItemAtIndex = Number(inputIndex);
@@ -97,14 +100,14 @@ export const ListPage = () => {
     let i = 0;
     while (i <= addItemAtIndex) {
       setChangingIndex(i);
-      await sleep(500);
+      await sleep(SHORT_DELAY_IN_MS);
       i++;
     }
     list.addByIndex(inputValue, addItemAtIndex);
     const arrayFromLinkedList = list.toArray();
     setArray(arrayFromLinkedList);
     setSolutionState(LinkedListStateVariety.Success);
-    await sleep(500);
+    await sleep(SHORT_DELAY_IN_MS);
     setInputIndex('');
     setInputValue('');
     setIsIndexInSearch(false);
@@ -113,13 +116,13 @@ export const ListPage = () => {
     setIsFormSubmitting(false);
   };
 
-  const handleDeleteByIndex = async () => {
+  const handleDeleteByIndex: ReactEventHandler<HTMLButtonElement> = async () => {
     setIsFormSubmitting(true);
     setSolutionState(LinkedListStateVariety.DeleteByIndex);
     const deleteIndex = Number(inputIndex);
     setInputIndex('');
     setChangingIndex(deleteIndex);
-    await sleep(1000);
+    await sleep(DELAY_IN_MS);
     list.deleteByIndex(deleteIndex);
     const arrayFromLinkedList = list.toArray();
     setArray(arrayFromLinkedList);
@@ -162,7 +165,7 @@ export const ListPage = () => {
         />
       );
     } else if (index === 0) {
-      return 'head';
+      return HEAD;
     } else {
       return '';
     }
@@ -185,7 +188,7 @@ export const ListPage = () => {
         />
       );
     } else if (index === array.length - 1) {
-      return 'tail';
+      return TAIL;
     } else {
       return '';
     }
@@ -209,9 +212,9 @@ export const ListPage = () => {
       <form className={ styles.form }>
         <fieldset className={ `${ styles.form_fieldset }` }>
           <Input
-            disabled={ isFormSubmitting || array.length >= 7 }
+            disabled={ isFormSubmitting || array.length >= LIST_MAX_LENGTH_LINKED_LIST }
             value={ inputValue }
-            maxLength={ 4 }
+            maxLength={ INPUT_MAX_LENGTH_LINKED_LIST }
             isLimitText={ true }
             onChange={ (e) => setInputValue(e.currentTarget.value) }
             extraClass={ styles.form_input }
@@ -255,23 +258,38 @@ export const ListPage = () => {
             disabled={ array.length === 0 || isFormSubmitting }
             value={ inputIndex }
             onChange={ (e) => setInputIndex(e.currentTarget.value) }
-            min={ 0 }
+            min={ LIST_MIN_INDEX_LINKED_LIST }
             max={ array.length > 1 ? array.length - 1 : ' 0 ' }
             type={ 'number' }
             extraClass={ styles.form_input }
             placeholder={ 'Введите индекс' }
           />
           <Button
-            disabled={ Number(inputIndex) < 0 || Number(inputIndex) >= array.length || isFormSubmitting || !inputIndex || !inputValue }
-            isLoader={ solutionState === LinkedListStateVariety.AddByIndex }
+            disabled={
+              Number(inputIndex) < LIST_MIN_INDEX_LINKED_LIST
+              || Number(inputIndex) >= array.length
+              || isFormSubmitting
+              || !inputIndex
+              || !inputValue
+            }
+            isLoader={
+              solutionState === LinkedListStateVariety.AddByIndex
+            }
             type={ 'button' }
             text={ 'Добавить по индексу' }
             extraClass={ `${ styles.form_button } ${ styles.form_button_type_index }` }
             onClick={ handleAddByIndex }
           />
           <Button
-            disabled={ Number(inputIndex) < 0 || Number(inputIndex) >= array.length || isFormSubmitting || !inputIndex }
-            isLoader={ solutionState === LinkedListStateVariety.DeleteByIndex }
+            disabled={
+              Number(inputIndex) < LIST_MIN_INDEX_LINKED_LIST
+              || Number(inputIndex) >= array.length
+              || isFormSubmitting
+              || !inputIndex
+            }
+            isLoader={
+              solutionState === LinkedListStateVariety.DeleteByIndex
+            }
             type={ 'button' }
             text={ 'Удалить по индексу' }
             extraClass={ `${ styles.form_button } ${ styles.form_button_type_index }` }
@@ -285,7 +303,7 @@ export const ListPage = () => {
             ? array.map((item: LinkedListNode<string>, index) => (
               <li
                 className={ styles.wrapper_element }
-                key={ nanoid() }
+                key={ index }
               >
                 <Circle
                   state={ findState(item, index) }
@@ -302,8 +320,8 @@ export const ListPage = () => {
                       && solutionState ===
                       LinkedListStateVariety.AddByIndex
                       && index < changingIndex
-                        ? '#d252e1'
-                        : '#0032ff'
+                        ? COLOR_CHANGING
+                        : COLOR_DEFAULT
                     }
                   />
                 }

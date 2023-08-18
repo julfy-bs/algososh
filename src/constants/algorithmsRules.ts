@@ -1,0 +1,10 @@
+export const INPUT_MAX_LENGTH_STRING = 11;
+export const INPUT_MIN_VALUE_FIBONACCI = 1;
+export const INPUT_MAX_VALUE_FIBONACCI = 19;
+export const ARRAY_DEFAULT_SIZE_QUEUE = 7;
+export const INPUT_MAX_LENGTH_STACK = 4;
+export const INPUT_MAX_LENGTH_QUEUE = 4;
+export const LIST_MAX_LENGTH_LINKED_LIST = 7;
+export const LIST_MIN_INDEX_LINKED_LIST = 0;
+export const INITIAL_ARRAY_LINKED_LIST = ['0', '34', '8', '1'];
+export const INPUT_MAX_LENGTH_LINKED_LIST = 4;

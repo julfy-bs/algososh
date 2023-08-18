@@ -3,12 +3,14 @@ import { SolutionLayout } from '../ui/solution-layout/solution-layout';
 import { Input } from '../ui/input/input';
 import { Button } from '../ui/button/button';
 import { Circle } from '../ui/circle/circle';
-import { nanoid } from 'nanoid';
+import { getFibonacciNumbers } from './utils/getFibonacciNumbers';
+import { sleep } from '../../helpers/sleep';
+import { INPUT_MAX_VALUE_FIBONACCI, INPUT_MIN_VALUE_FIBONACCI } from '../../constants/algorithmsRules';
+import { DELAY_IN_MS } from '../../constants/delays';
 import styles from './fibonacci-page.module.css';
-import { startFibonacciAlgorithm } from './utils/startFibonacciAlgorithm';
 
 export const FibonacciPage = () => {
-  const [value, setValue] = useState<number | string>('');
+  const [value, setValue] = useState<string>('');
   const [valuesArray, setValuesArray] = useState<number[]>([]);
   const [valueIndex, setValueIndex] = useState<number>(0);
 
@@ -24,11 +26,15 @@ export const FibonacciPage = () => {
     e.preventDefault();
     setIsCircleVisible(true);
     setIsFormSubmitted(true);
-    await startFibonacciAlgorithm(
-      +value,
-      setValuesArray,
-      setValueIndex
-    );
+    const fibonacciArray = getFibonacciNumbers(+value);
+    setValuesArray(fibonacciArray);
+    setValueIndex(0);
+    let i = 0;
+    while (i <= +value) {
+      setValueIndex(i);
+      await sleep(DELAY_IN_MS);
+      i++;
+    }
     setIsFormSubmitted(false);
   };
 
@@ -39,8 +45,8 @@ export const FibonacciPage = () => {
           value={ value }
           placeholder={ 'Введите число' }
           disabled={ isFormSubmitted }
-          min={ 1 }
-          max={ 19 }
+          min={ INPUT_MIN_VALUE_FIBONACCI }
+          max={ INPUT_MAX_VALUE_FIBONACCI }
           isLimitText={ true }
           type={ 'number' }
           onChange={ handleChange }
@@ -50,7 +56,12 @@ export const FibonacciPage = () => {
           type={ 'submit' }
           text={ 'Рассчитать' }
           isLoader={ isFormSubmitted }
-          disabled={ isFormSubmitted || !value || value > 19 }
+          disabled={
+            isFormSubmitted
+            || !value
+            || +value <= INPUT_MIN_VALUE_FIBONACCI
+            || +value > INPUT_MAX_VALUE_FIBONACCI
+          }
         />
       </form>
       <div className={ styles.wrapper }>
@@ -60,7 +71,7 @@ export const FibonacciPage = () => {
               .map((item: number, index: number) => (
                 <Circle
                   letter={ item.toString() }
-                  key={ nanoid() }
+                  key={ index }
                   index={ index }
                   extraClass={
                     (valueIndex === index || valueIndex > index)

@@ -1,4 +1,4 @@
-export const createFibonacciArray = (n: number): number[] => {
+export const getFibonacciNumbers = (n: number): number[] => {
   let arr: number[] = [];
   for (let i = 0; i < +n + 1; i++) {
     if (arr.length === 0 || arr.length === 1) {

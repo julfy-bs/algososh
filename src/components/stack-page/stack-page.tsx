@@ -3,14 +3,15 @@ import { SolutionLayout } from '../ui/solution-layout/solution-layout';
 import { Button } from '../ui/button/button';
 import { Input } from '../ui/input/input';
 import { Circle } from '../ui/circle/circle';
-import { nanoid } from 'nanoid';
-
-import styles from './stack-page.module.css';
+import { sleep } from '../../helpers/sleep';
 import { ElementStates, ElementStatesVariety } from '../../types/element-states';
 import { Stack } from './utils/stack';
 import { SolutionState, SolutionStateVariety } from '../../types/solution';
 import { StackSettings } from '../../types/stack';
-import { sleep } from '../../helpers/sleep';
+import { DELAY_IN_MS } from '../../constants/delays';
+import { INPUT_MAX_LENGTH_STACK } from '../../constants/algorithmsRules';
+import { TOP } from '../../constants/element-captions';
+import styles from './stack-page.module.css';
 
 export const StackPage = () => {
   const [value, setValue] = useState<string>('');
@@ -34,7 +35,7 @@ export const StackPage = () => {
     setSolutionState(SolutionStateVariety.Add);
     const options: StackSettings<string> = stack.push(value);
     setStackSettings(options);
-    await sleep(1000);
+    await sleep(DELAY_IN_MS);
     setValue('');
     setSolutionState(SolutionStateVariety.Empty);
     setIsFormSubmitting(false);
@@ -43,7 +44,7 @@ export const StackPage = () => {
   const handleDeleteFromStack: ReactEventHandler<HTMLButtonElement> = async () => {
     setIsFormSubmitting(true);
     setSolutionState(SolutionStateVariety.Delete);
-    await sleep(1000);
+    await sleep(DELAY_IN_MS);
     const options = stack.pop();
     setStackSettings(options);
     setSolutionState(SolutionStateVariety.Empty);
@@ -53,7 +54,7 @@ export const StackPage = () => {
   const handleClearValuesArray: ReactEventHandler<HTMLButtonElement> = async () => {
     setIsFormSubmitting(true);
     setSolutionState(SolutionStateVariety.Clear);
-    await sleep(1000);
+    await sleep(DELAY_IN_MS);
     const options = stack.clear();
     setStackSettings(options);
     setSolutionState(SolutionStateVariety.Empty);
@@ -79,7 +80,7 @@ export const StackPage = () => {
           <Input
             disabled={ isFormSubmitting }
             value={ value }
-            maxLength={ 4 }
+            maxLength={ INPUT_MAX_LENGTH_STACK }
             onChange={ handleChange }
           />
         </fieldset>
@@ -114,12 +115,12 @@ export const StackPage = () => {
           isCircleVisible
             ? stackSettings.array.map((item, index) => (
               <Circle
-                key={ nanoid() }
+                key={ index }
                 state={ findState(item, index) }
                 letter={ item }
                 index={ index }
                 head={ stackSettings.array.length - 1 === index
-                  ? 'top'
+                  ? TOP
                   : '' }/>
             ))
             : <></>

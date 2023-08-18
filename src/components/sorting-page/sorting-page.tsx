@@ -1,12 +1,15 @@
 import { ReactEventHandler, useState } from 'react';
+import { Direction, SortDirection, SortElement, SortOptions, SortType, Type } from '../../types/sort';
 import { SolutionLayout } from '../ui/solution-layout/solution-layout';
-import styles from './sorting-page.module.css';
 import { Button } from '../ui/button/button';
 import { RadioInput } from '../ui/radio-input/radio-input';
 import { Column } from '../ui/column/column';
-import { Direction, SortDirection, SortElement, SortType, Type } from '../../types/sort';
 import { createRandomArray } from './utils/createRandomArray';
-import { startSorting } from './utils/startSorting';
+import { sortWithSelection } from './utils/sortWithSelection';
+import { sortWithBubble } from './utils/sortWithBubble';
+import { sleep } from '../../helpers/sleep';
+import { SHORT_DELAY_IN_MS } from '../../constants/delays';
+import styles from './sorting-page.module.css';
 
 
 export const SortingPage = () => {
@@ -15,30 +18,39 @@ export const SortingPage = () => {
   const [sortArray, setSortArray] = useState<SortElement[]>([]);
   const [isSortInProgress, setIsSortInProgress] = useState<boolean>(false);
 
-  const handleAscending = async () => {
-    setSortDirection(Direction.Ascending);
-    await startSorting(
-      {
-        array: sortArray,
-        direction: Direction.Ascending,
-        type: sortType
-      },
-      setIsSortInProgress,
-      setSortArray
-    );
+  const startSorting = async (sortOptions: SortOptions) => {
+    setIsSortInProgress(true);
+    let index = 0;
+    let arraySortingMap: SortElement[][];
+
+    (sortOptions.type === Type.Selection)
+      ? arraySortingMap = sortWithSelection(sortOptions)
+      : arraySortingMap = sortWithBubble(sortOptions);
+
+    while (index < arraySortingMap.length) {
+      setSortArray(arraySortingMap[index]);
+      await sleep(SHORT_DELAY_IN_MS);
+      index++;
+    }
+    setIsSortInProgress(false);
   };
 
-  const handleDescending = async () => {
+  const handleAscending: ReactEventHandler<HTMLButtonElement> = async () => {
+    setSortDirection(Direction.Ascending);
+    await startSorting({
+      array: sortArray,
+      direction: Direction.Ascending,
+      type: sortType
+    });
+  };
+
+  const handleDescending: ReactEventHandler<HTMLButtonElement> = async () => {
     setSortDirection(Direction.Descending);
-    await startSorting(
-      {
-        array: sortArray,
-        direction: Direction.Descending,
-        type: sortType
-      },
-      setIsSortInProgress,
-      setSortArray
-    );
+    await startSorting({
+      array: sortArray,
+      direction: Direction.Descending,
+      type: sortType
+    });
   };
 
   const handleCreateRandomArrayButton: ReactEventHandler<HTMLButtonElement> = () => {
