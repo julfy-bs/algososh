@@ -1,43 +1,50 @@
-import React from "react";
-import styles from "./input.module.css";
+import { HTMLProps } from 'react';
+import styles from './input.module.css';
 
-interface InputProps extends React.HTMLProps<HTMLInputElement> {
+type InputProps = {
   placeholder?: string;
   extraClass?: string;
   isLimitText?: boolean;
 }
 
-export const Input: React.FC<InputProps> = ({
-  placeholder = "Введите текст",
-  extraClass = "",
-  type = "text",
-  maxLength,
-  max,
-  isLimitText = false,
-  ...rest
-}) => {
-  const limitText =
-    type === "text"
-      ? `Максимум — ${maxLength} символа`
-      : `Максимальное число — ${max}`;
+export const Input = ({
+                        placeholder = 'Введите текст',
+                        extraClass = '',
+                        type = 'text',
+                        maxLength,
+                        max,
+                        isLimitText = false,
+                        ...rest
+                      }: InputProps & HTMLProps<HTMLInputElement>) => {
 
   return (
-    <div className={`${styles.content} ${extraClass}`}>
+    <div className={ `${ styles.content } ${ extraClass }` }>
       <input
-        className={`${styles.input} text text_type_input text_color_input`}
-        placeholder={placeholder}
-        type={type}
-        maxLength={maxLength}
-        max={max}
-        {...rest}
+        className={ `${ styles.input } text text_type_input text_color_input` }
+        placeholder={ placeholder }
+        type={ type }
+        maxLength={ maxLength }
+        max={ max }
+        { ...rest }
       />
-      {isLimitText && (
-        <span
-          className={`text text_type_input-lim text_color_input mt-2 ml-8 ${styles.limit}`}
-        >
-          {limitText}
-        </span>
-      )}
+      {
+        maxLength && (
+          <span
+            className={ `text text_type_input-lim text_color_input mt-2 ml-8 ${ styles.limit }` }
+          >
+            { `Максимум — ${ maxLength } символов` }
+          </span>
+        )
+      }
+      {
+        max && (
+          <span
+            className={ `text text_type_input-lim text_color_input mt-2 ml-8 ${ styles.limit }` }
+          >
+            { `Максимальное число — ${ max }` }
+          </span>
+        )
+      }
     </div>
   );
 };

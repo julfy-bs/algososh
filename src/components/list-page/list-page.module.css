@@ -1,0 +1,63 @@
+.form {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: space-between;
+  margin-bottom: 90px;
+  max-width: 952px;
+  width: 100%;
+}
+
+.form_fieldset {
+  border: none;
+  box-sizing: border-box;
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.form_fieldset_type_index {
+}
+
+.form_input {
+  max-width: 204px;
+  width: 100%;
+}
+
+.form_button {
+  box-sizing: border-box;
+  max-width: 175px;
+  padding: 18px 24px;
+  width: 100%;
+
+}
+
+.form_button_type_index {
+  box-sizing: border-box;
+  max-width: 362px;
+  padding: 18px 24px;
+  width: 100%;
+}
+
+.wrapper {
+  align-items: center;
+  align-self: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 64px 16px;
+  justify-content: flex-start;
+  list-style: none;
+  margin: 0;
+  max-width: 944px;
+  padding: 0;
+}
+
+.wrapper_element {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}

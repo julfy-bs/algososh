@@ -1,0 +1,21 @@
+.form {
+  align-self: center;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 48px;
+  max-width: 522px;
+  width: 100%;
+}
+
+.wrapper {
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  gap: 48px 16px;
+  flex-wrap: wrap;
+  max-width: 944px;
+}
+
+.circle_invisible {
+  display: none;
+}

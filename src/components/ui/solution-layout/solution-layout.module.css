@@ -2,15 +2,16 @@
   background-image: url("../../../images/bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-height: 100vh;
 }
 
 .titleBox {
   display: flex;
-  margin-left: 19px;
+  margin-top: 40px;
+  margin-left: 20px;
 }
 
 .subtitle {
@@ -18,16 +19,14 @@
 }
 
 .contentCard {
-  background: #ffffff;
+  background: #fff;
   border-radius: 20px;
-  margin: 31px 20px 28px;
-  padding: 36px;
-  height: 693px;
   box-sizing: border-box;
-}
-
-.returnButton {
-  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  margin: 31px 20px 28px;
+  min-height: 693px;
+  padding: 36px;
 }
 
 .cardTitle {
@@ -36,11 +35,33 @@
 
 .copyright {
   margin: 0 20px 0 auto;
-  text-align: right;
-  padding-bottom: 36px;
   max-width: 1240px;
+  padding-bottom: 36px;
+  text-align: right;
 }
 
 .link {
+  margin-bottom: 50px;
   text-decoration: none;
+}
+
+@media screen and (max-width: 650px) {
+  .titleBox {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 0;
+  }
+
+  .title {
+    align-self: center;
+    font-size: 10vw;
+    line-height: 10vw;
+    margin: 0;
+  }
+
+  .subtitle {
+    margin: 0;
+  }
 }
