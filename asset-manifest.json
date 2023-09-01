@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/algososh/static/css/main.7b60a1bb.css",
-    "main.js": "/algososh/static/js/main.b08103cb.js",
-    "static/js/787.0d1937ff.chunk.js": "/algososh/static/js/787.0d1937ff.chunk.js",
+    "main.js": "/algososh/static/js/main.c0de0c3f.js",
+    "static/js/787.70de8406.chunk.js": "/algososh/static/js/787.70de8406.chunk.js",
     "static/media/bg.jpg": "/algososh/static/media/bg.971318c52485d1963a30.jpg",
     "static/media/arr-hover.svg": "/algososh/static/media/arr-hover.b8bf27c9f429cdb6bf49.svg",
     "static/media/arr.svg": "/algososh/static/media/arr.033dfcca0644ae48cdfd.svg",
@@ -19,11 +19,11 @@
     "index.html": "/algososh/index.html",
     "static/media/loader.svg": "/algososh/static/media/loader.3560c7ba1c44b9900cfc03ff6ddbe067.svg",
     "main.7b60a1bb.css.map": "/algososh/static/css/main.7b60a1bb.css.map",
-    "main.b08103cb.js.map": "/algososh/static/js/main.b08103cb.js.map",
-    "787.0d1937ff.chunk.js.map": "/algososh/static/js/787.0d1937ff.chunk.js.map"
+    "main.c0de0c3f.js.map": "/algososh/static/js/main.c0de0c3f.js.map",
+    "787.70de8406.chunk.js.map": "/algososh/static/js/787.70de8406.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7b60a1bb.css",
-    "static/js/main.b08103cb.js"
+    "static/js/main.c0de0c3f.js"
   ]
 }
