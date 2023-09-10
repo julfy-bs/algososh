@@ -1,4 +1,4 @@
-import { ElementStates } from '../../types/element-states';
+import { ElementStates } from '../../../types/element-states';
 
 export const changeCircleColor =
   (startIndex: number, endIndex: number, index: number): ElementStates => {

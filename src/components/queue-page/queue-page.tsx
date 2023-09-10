@@ -23,14 +23,14 @@ export const QueuePage = () => {
   const [queueSize] = useState<number>(ARRAY_DEFAULT_SIZE_QUEUE);
   const [solutionState, setSolutionState] = useState<SolutionState>(SolutionStateVariety.Empty);
   const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
-  const queue = useMemo(() => new Queue<string>(queueSize), []);
+  const queue = useMemo(() => new Queue<string>(queueSize), [queueSize]);
 
   useEffect(() => {
     setQueueSettings({
       ...queueSettings,
       array: queue.getElements()
     });
-  }, []);
+  }, [queue, queueSettings]);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e): void => {
     setValue(e.currentTarget.value);
