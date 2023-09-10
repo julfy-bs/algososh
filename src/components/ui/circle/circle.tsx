@@ -1,6 +1,6 @@
-import { ReactElement } from 'react';
-import styles from "./circle.module.css";
-import { ElementStates } from "../../../types/element-states";
+import { FC, ReactElement } from 'react';
+import { ElementStates } from '../../../types/element-states';
+import styles from './circle.module.css';
 
 type CircleProps = {
   state?: ElementStates;
@@ -8,55 +8,55 @@ type CircleProps = {
   head?: string | ReactElement | null;
   index?: number;
   tail?: string | ReactElement | null;
-  tailType?: "string" | "element";
+  tailType?: 'string' | 'element';
   extraClass?: string;
   isSmall?: boolean;
 }
 
-export const Circle = ({
+export const Circle: FC<CircleProps> = ({
   state = ElementStates.Default,
   letter,
   head,
   index,
   tail,
-  extraClass = "",
+  extraClass = '',
   isSmall,
-}: CircleProps) => {
+}) => {
   return (
-    <div className={`${styles.content} ${extraClass}`}>
+    <div className={ `${ styles.content } ${ extraClass }` }>
       <div
-        className={`text text_type_input text_color_input mb-4 ${
+        className={ `text text_type_input text_color_input mb-4 ${
           styles.absolute
-        } ${styles.head} ${
-          styles[typeof head === "string" ? "string" : "element"]
-        }`}
+        } ${ styles.head } ${
+          styles[typeof head === 'string' ? 'string' : 'element']
+        }` }
       >
-        {head}
+        { head }
       </div>
       <div
-        className={`${styles.circle}  ${isSmall ? styles.small : ""} ${
+        className={ `${ styles.circle }  ${ isSmall ? styles.small : '' } ${
           styles[state]
-        }`}
+        }` }
       >
         <p
-          className={`text text_type_circle text_color_input ${styles.letter}`}
+          className={ `text text_type_circle text_color_input ${ styles.letter }` }
         >
-          {letter}
+          { letter }
         </p>
       </div>
       <p
-        className={`text text_type_input text_color_input mt-4 ${styles.absolute} ${styles.index}`}
+        className={ `text text_type_input text_color_input mt-4 ${ styles.absolute } ${ styles.index }` }
       >
-        {index?.toString()}
+        { index?.toString() }
       </p>
       <div
-        className={`text text_type_input text_color_input mt-4 ${
+        className={ `text text_type_input text_color_input mt-4 ${
           styles.absolute
-        } ${index?.toString() ? styles.tail60 : styles.tail30} ${
-          styles[typeof tail === "string" ? "string" : "element"]
-        }`}
+        } ${ index?.toString() ? styles.tail60 : styles.tail30 } ${
+          styles[typeof tail === 'string' ? 'string' : 'element']
+        }` }
       >
-        {tail}
+        { tail }
       </div>
     </div>
   );

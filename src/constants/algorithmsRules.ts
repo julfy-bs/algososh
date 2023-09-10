@@ -8,3 +8,8 @@ export const LIST_MAX_LENGTH_LINKED_LIST = 7;
 export const LIST_MIN_INDEX_LINKED_LIST = 0;
 export const INITIAL_ARRAY_LINKED_LIST = ['0', '34', '8', '1'];
 export const INPUT_MAX_LENGTH_LINKED_LIST = 4;
+export const RANDOM_ARRAY_MIN_LENGTH = 3;
+export const RANDOM_ARRAY_MAX_LENGTH = 17;
+export const RANDOM_ARRAY_MIN_VALUE = 0;
+export const RANDOM_ARRAY_MAX_VALUE = 100;
+

@@ -4,10 +4,9 @@ import { SolutionLayout } from '../ui/solution-layout/solution-layout';
 import { Input } from '../ui/input/input';
 import { Circle } from '../ui/circle/circle';
 import { Button } from '../ui/button/button';
-import { changeCircleColor } from './utils';
-import { sleep } from '../../helpers/sleep';
-import { swap } from '../../helpers/swap';
+import { changeCircleColor } from './utils/changeCircleColor';
 import { INPUT_MAX_LENGTH_STRING } from '../../constants/algorithmsRules';
+import { reverseString } from './utils/reverseString';
 import { DELAY_IN_MS } from '../../constants/delays';
 
 export const StringComponent = () => {
@@ -19,7 +18,6 @@ export const StringComponent = () => {
 
   const [pointerFirst, setPointerFirst] = useState<number>(0);
   const [pointerSecond, setPointerSecond] = useState<number>(0);
-
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const target = e.currentTarget.value;
@@ -35,17 +33,13 @@ export const StringComponent = () => {
     setIsFormSubmitted(true);
     setIsCircleVisible(true);
     setValue('');
-    let start = 0;
-    let end = valuesArray.length - 1;
-    while (start < end) {
-      setPointerFirst(start);
-      setPointerSecond(end);
-      await sleep(DELAY_IN_MS);
-      swap(valuesArray, start, end);
-      setValuesArray(valuesArray);
-      start++;
-      end--;
-    }
+    await reverseString(
+      valuesArray,
+      setValuesArray,
+      setPointerFirst,
+      setPointerSecond,
+      DELAY_IN_MS
+    );
     setPointerFirst(valuesArray.length);
     setPointerSecond(valuesArray.length);
     setIsFormSubmitted(false);
@@ -53,7 +47,10 @@ export const StringComponent = () => {
 
   return (
     <SolutionLayout title="Строка">
-      <form className={ styles.form } onSubmit={ handleSubmit }>
+      <form
+        className={ styles.form }
+        onSubmit={ handleSubmit }
+      >
         <Input
           value={ value }
           disabled={ isFormSubmitted }

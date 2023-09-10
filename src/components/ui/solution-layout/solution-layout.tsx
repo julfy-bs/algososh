@@ -3,9 +3,10 @@ import { ReturnButton } from "../return-button/return-button";
 import { Link } from "react-router-dom";
 import styles from "./solution-layout.module.css";
 
-interface SolutionLayoutProps {
+type SolutionLayoutProps = {
   title: string;
   extraClass?: string;
+  children?: JSX.Element[]
 }
 
 export const SolutionLayout: React.FC<SolutionLayoutProps> = ({
