@@ -8,6 +8,7 @@ import { sleep } from '../../helpers/sleep';
 import { INPUT_MAX_VALUE_FIBONACCI, INPUT_MIN_VALUE_FIBONACCI } from '../../constants/algorithmsRules';
 import { DELAY_IN_MS } from '../../constants/delays';
 import styles from './fibonacci-page.module.css';
+import { TEST_ID_FIB_BUTTON, TEST_ID_FIB_INPUT } from '../../constants/test';
 
 export const FibonacciPage = () => {
   const [value, setValue] = useState<string>('');
@@ -42,6 +43,7 @@ export const FibonacciPage = () => {
     <SolutionLayout title="Последовательность Фибоначчи">
       <form className={ styles.form } onSubmit={ handleSubmit }>
         <Input
+          data-test-id={TEST_ID_FIB_INPUT}
           value={ value }
           placeholder={ 'Введите число' }
           disabled={ isFormSubmitted }
@@ -53,13 +55,14 @@ export const FibonacciPage = () => {
           autoComplete={ 'off' }
         />
         <Button
+          data-test-id={TEST_ID_FIB_BUTTON}
           type={ 'submit' }
           text={ 'Рассчитать' }
           isLoader={ isFormSubmitted }
           disabled={
             isFormSubmitted
             || !value
-            || +value <= INPUT_MIN_VALUE_FIBONACCI
+            || +value < INPUT_MIN_VALUE_FIBONACCI
             || +value > INPUT_MAX_VALUE_FIBONACCI
           }
         />
