@@ -12,3 +12,5 @@ export const TEST_ID_CARD_SORTING = 'sorting-link';
 export const TEST_ID_CARD_STACK = "stack-link";
 export const TEST_ID_CARD_QUEUE = "queue-link";
 export const TEST_ID_CARD_LIST = "list-link";
+export const TEST_ID_STRING_INPUT = "string-input";
+export const TEST_ID_STRING_BUTTON = "string-button";

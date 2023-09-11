@@ -25,28 +25,30 @@ export const Button: FC<ButtonProps> = ({
   ...rest
 }) => {
   const currentIcon =
-    sorting === Direction.Ascending ? <AscendingIcon/> : <DescendingIcon/>;
-  const className = `text text_type_button text_color_primary ${
-    styles.button
-  } ${ linkedList && styles[linkedList] } ${
-    isLoader && styles.loader
-  } ${ extraClass }`;
+    sorting === Direction.Ascending ? <AscendingIcon /> : <DescendingIcon />;
+  const className = `text text_type_button text_color_primary ${styles.button} 
+  ${linkedList ? styles[linkedList] : ''} 
+  ${isLoader ? styles.loader : ''} ${extraClass}`;
 
   return (
     <button
-      className={ className }
-      type={ type }
-      disabled={ isLoader || disabled }
-      { ...rest }
+      className={className}
+      type={type}
+      disabled={isLoader || disabled}
+      {...rest}
     >
-      { isLoader ? (
-        <img className={ styles.loader_icon } src={ loaderIcon } alt="Загрузка."/>
+      {isLoader ? (
+        <img
+          className={styles.loader_icon}
+          src={loaderIcon}
+          alt="Загрузка."
+        />
       ) : (
         <>
-          { sorting && currentIcon }
-          <p className={ `text ${ sorting && 'ml-5' }` }>{ text }</p>
+          {sorting && currentIcon}
+          <p className={`text ${sorting && 'ml-5'}`}>{text}</p>
         </>
-      ) }
+      )}
     </button>
   );
 };
