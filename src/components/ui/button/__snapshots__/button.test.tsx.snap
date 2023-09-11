@@ -1,18 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`changes the class when hovered 1`] = `undefined`;
-
-exports[`changes the class when hovered 2`] = `
-<button
-  className="text text_type_button text_color_primary button undefined false "
-  type="button"
->
-  <p
-    className="text undefined"
-  />
-</button>
-`;
-
 exports[`Компонент <Button /> рендерится без ошибок без текста 1`] = `
 <button
   className="text text_type_button text_color_primary button undefined false "
