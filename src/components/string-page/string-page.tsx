@@ -5,10 +5,10 @@ import { Input } from '../ui/input/input';
 import { Circle } from '../ui/circle/circle';
 import { Button } from '../ui/button/button';
 import { changeCircleColor } from './utils/changeCircleColor';
-import { INPUT_MAX_LENGTH_STRING } from '../../constants/algorithmsRules';
 import { reverseString } from './utils/reverseString';
 import { DELAY_IN_MS } from '../../constants/delays';
-import { TEST_ID_STRING_BUTTON, TEST_ID_STRING_INPUT } from '../../constants/test';
+import { INPUT_MAX_LENGTH_STRING } from '../../constants/algorithms-rules';
+import { BUTTON_TEST_ID, INPUT_TEST_ID } from '../../constants/tests/string';
 
 export const StringComponent = () => {
   const [value, setValue] = useState<string>('');
@@ -53,7 +53,7 @@ export const StringComponent = () => {
         onSubmit={ handleSubmit }
       >
         <Input
-          data-test-id={TEST_ID_STRING_INPUT}
+          data-test-id={ INPUT_TEST_ID }
           value={ value }
           disabled={ isFormSubmitted }
           maxLength={ INPUT_MAX_LENGTH_STRING }
@@ -63,7 +63,7 @@ export const StringComponent = () => {
           autoComplete={ 'off' }
         />
         <Button
-          data-test-id={TEST_ID_STRING_BUTTON}
+          data-test-id={ BUTTON_TEST_ID }
           type={ 'submit' }
           text={ 'Развернуть' }
           isLoader={ isFormSubmitted }

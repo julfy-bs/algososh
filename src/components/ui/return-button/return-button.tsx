@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './return-button.module.css';
 import { ReturnIcon } from '../icons/return-icon';
-import { TEST_ID_HOMEPAGE_BTN } from '../../../constants/test';
+import { LINK_HOMEPAGE_TEST_ID } from '../../../constants/tests/routes';
 
 interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
   type?: 'button' | 'submit' | 'reset';
@@ -14,10 +14,10 @@ export const ReturnButton: React.FC<ButtonProps> = ({
 }) => {
   return (
     <button
-      data-test-id={TEST_ID_HOMEPAGE_BTN}
-      className={`${styles.button} ${extraClass}`}
+      data-test-id={ LINK_HOMEPAGE_TEST_ID }
+      className={ `${ styles.button } ${ extraClass }` }
       type="button"
-      {...rest}
+      { ...rest }
     >
       <ReturnIcon />
       <p className="text text_type_button text_color_link ml-4">К оглавлению</p>

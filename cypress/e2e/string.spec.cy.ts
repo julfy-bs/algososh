@@ -1,47 +1,52 @@
-import { TEST_ID_STRING_BUTTON, TEST_ID_STRING_INPUT, TEST_URL } from '../../src/constants/test';
+import * as string from '../../src/constants/tests/string';
+import * as circle from '../../src/constants/tests/circle';
+import { hexToRgb } from '../../src/helpers/hexToRgb';
+import { TEST_URL } from '../../src/constants/tests/general';
 import { DELAY_IN_MS } from '../../src/constants/delays';
+import { COLOR_CHANGING, COLOR_DEFAULT, COLOR_MODIFIED } from '../../src/constants/colors';
+
 
 describe('Страница визуализации алгоритма строки', () => {
 
   beforeEach(() => {
-    cy.visit(`${TEST_URL}/recursion`);
+    cy.visit(`${ TEST_URL }/recursion`);
   });
 
   afterEach(() => {
-    cy.get(`[data-test-id=${TEST_ID_STRING_INPUT}]`).clear().should('be.empty');
+    cy.get(string.inputElement).clear().should('be.empty');
   });
 
 
   it('Кнопка должна быть заблокирована при пустом инпуте', () => {
-    cy.get(`[data-test-id=${TEST_ID_STRING_INPUT}]`).should('be.empty');
-    cy.get(`[data-test-id=${TEST_ID_STRING_BUTTON}]`).should('be.disabled');
+    cy.get(string.inputElement).should('be.empty');
+    cy.get(string.buttonElement).should('be.disabled');
   });
 
   it('Кнопка должна быть не заблокирована при заполненном инпуте', () => {
-    cy.get(`[data-test-id=${TEST_ID_STRING_INPUT}]`).type('string').should('have.value', 'string');
-    cy.get(`[data-test-id=${TEST_ID_STRING_BUTTON}]`).should('not.be.disabled');
+    cy.get(string.inputElement).type('string').should('have.value', 'string');
+    cy.get(string.buttonElement).should('not.be.disabled');
   });
 
-  it('Кнопка должна быть заблокирована при пустом инпуте', () => {
-    cy.get(`[data-test-id=${TEST_ID_STRING_INPUT}]`).type('string');
-    cy.get(`[data-test-id=${TEST_ID_STRING_BUTTON}]`).click();
+  it('Анимация выполняется корректно', () => {
+    cy.get(string.inputElement).type('string');
+    cy.get(string.buttonElement).click();
 
-    cy.get('[class^=circle_circle]').as('circle');
+    cy.get(circle.Circle).as('circle');
 
     cy.get('@circle')
-      .each((el, index) => {
+      .each((el: Element, index: number) => {
         if (index === 0 || index === 5) {
           cy.wrap(el).should(
             'have.css',
             'border',
-            '4px solid rgb(210, 82, 225)'
+            `4px solid ${ hexToRgb(COLOR_CHANGING) }`
           );
         }
         if (index > 0 && index < 5) {
           cy.wrap(el).should(
             'have.css',
             'border',
-            '4px solid rgb(0, 50, 255)'
+            `4px solid ${ hexToRgb(COLOR_DEFAULT) }`
           );
         }
         if (index === 0) expect(el).to.contain('s');
@@ -51,26 +56,26 @@ describe('Страница визуализации алгоритма стро�
     cy.wait(DELAY_IN_MS);
 
     cy.get('@circle')
-      .each((el, index) => {
+      .each((el: Element, index: number) => {
         if (index < 1 || index > 4) {
           cy.wrap(el).should(
             'have.css',
             'border',
-            '4px solid rgb(127, 224, 81)'
+            `4px solid ${ hexToRgb(COLOR_MODIFIED) }`
           );
         }
         if (index === 1 || index === 4) {
           cy.wrap(el).should(
             'have.css',
             'border',
-            '4px solid rgb(210, 82, 225)'
+            `4px solid ${ hexToRgb(COLOR_CHANGING) }`
           );
         }
         if (index > 1 && index < 4) {
           cy.wrap(el).should(
             'have.css',
             'border',
-            '4px solid rgb(0, 50, 255)'
+            `4px solid ${ hexToRgb(COLOR_DEFAULT) }`
           );
         }
         if (index === 1) expect(el).to.contain('t');
@@ -80,19 +85,19 @@ describe('Страница визуализации алгоритма стро�
     cy.wait(DELAY_IN_MS);
 
     cy.get('@circle')
-      .each((el, index) => {
+      .each((el: Element, index: number) => {
         if (index < 2 || index > 3) {
           cy.wrap(el).should(
             'have.css',
             'border',
-            '4px solid rgb(127, 224, 81)'
+            `4px solid ${ hexToRgb(COLOR_MODIFIED) }`
           );
         }
         if (index === 2 || index === 3) {
           cy.wrap(el).should(
             'have.css',
             'border',
-            '4px solid rgb(210, 82, 225)'
+            `4px solid ${ hexToRgb(COLOR_CHANGING) }`
           );
         }
         if (index === 2) expect(el).to.contain('r');
@@ -102,11 +107,11 @@ describe('Страница визуализации алгоритма стро�
     cy.wait(DELAY_IN_MS);
 
     cy.get('@circle')
-      .each((el, index) => {
+      .each((el: Element, index: number) => {
         cy.wrap(el).should(
           'have.css',
           'border',
-          '4px solid rgb(127, 224, 81)'
+          `4px solid ${ hexToRgb(COLOR_MODIFIED) }`
         );
 
         if (index === 0) expect(el).to.contain('g');

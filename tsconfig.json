@@ -16,5 +16,9 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "cypress/e2e"]
+  "include": [
+    "src",
+    "cypress/e2e",
+    "node_modules/cypress/types/cypress-global-vars.d.ts"
+  ]
 }

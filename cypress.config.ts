@@ -1,8 +1,9 @@
-import { defineConfig } from "cypress";
+import { defineConfig } from 'cypress';
+import { TEST_URL } from './src/constants/tests/general';
 
 export default defineConfig({
   e2e: {
-    baseUrl: 'http://localhost:3000',
+    baseUrl: TEST_URL,
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },

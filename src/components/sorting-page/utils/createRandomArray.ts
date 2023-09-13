@@ -5,7 +5,7 @@ import {
   RANDOM_ARRAY_MAX_LENGTH, RANDOM_ARRAY_MAX_VALUE,
   RANDOM_ARRAY_MIN_LENGTH,
   RANDOM_ARRAY_MIN_VALUE
-} from '../../../constants/algorithmsRules';
+} from '../../../constants/algorithms-rules';
 
 type Options = {
   minLength?: number;
