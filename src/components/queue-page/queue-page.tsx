@@ -9,7 +9,7 @@ import { ElementStates, ElementStatesVariety } from '../../types/element-states'
 import { QueueSettings } from '../../types/queue';
 import { SolutionState, SolutionStateVariety } from '../../types/solution';
 import { DELAY_IN_MS } from '../../constants/delays';
-import { INPUT_MAX_LENGTH_QUEUE, ARRAY_DEFAULT_SIZE_QUEUE } from '../../constants/algorithmsRules';
+import { INPUT_MAX_LENGTH_QUEUE, ARRAY_DEFAULT_SIZE_QUEUE } from '../../constants/algorithms-rules';
 import styles from './queue-page.module.css';
 import { HEAD, TAIL } from '../../constants/element-captions';
 

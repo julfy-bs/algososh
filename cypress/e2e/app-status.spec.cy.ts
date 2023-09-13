@@ -1,10 +1,8 @@
-/// <reference types="cypress" />
+import { TEST_URL } from '../../src/constants/tests/general';
 
 describe('Приложение доступно', () => {
 
-  it('Приложение открыто на localhost:3000', () => {
-    cy.visit('http://localhost:3000');
+  it(`Приложение открыто на правильном порте - ${ TEST_URL }`, () => {
+    cy.visit(TEST_URL);
   });
 });
-
-export {};

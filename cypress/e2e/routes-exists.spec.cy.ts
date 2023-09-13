@@ -1,4 +1,5 @@
-import * as constants from '../../src/constants/test';
+import * as constants from '../../src/constants/tests/general';
+import * as routes from '../../src/constants/tests/routes';
 
 describe('Ссылки с главной страницы работают и ведут', () => {
   beforeEach(() => {
@@ -6,36 +7,36 @@ describe('Ссылки с главной страницы работают и в
   });
 
   afterEach(() => {
-    cy.get(`[data-test-id=${constants.TEST_ID_HOMEPAGE_BTN}]`).click();
+    cy.get(routes.LINK_HOME_PAGE).click();
   });
 
   it('на роут "/recursion"', () => {
-    cy.get(`[data-test-id="${constants.TEST_ID_CARD_STRING}"]`).click();
-    cy.contains(constants.TEST_ID_TITLE_STRING);
+    cy.get(routes.LINK_STRING_PAGE).click();
+    cy.contains(routes.TITLE_CONTENT_STRING_TEST_ID);
   });
 
   it('на роут "/fibonacci"', () => {
-    cy.get(`[data-test-id="${constants.TEST_ID_CARD_FIB}"]`).click();
-    cy.contains(constants.TEST_ID_TITLE_FIB);
+    cy.get(routes.LINK_FIBONACCI_PAGE).click();
+    cy.contains(routes.TITLE_CONTENT_FIBONACCI_TEST_ID);
   });
 
   it('на роут "/sorting"', () => {
-    cy.get(`[data-test-id="${constants.TEST_ID_CARD_SORTING}"]`).click();
-    cy.contains(constants.TEST_ID_TITLE_ARRAY);
+    cy.get(routes.LINK_ARRAY_PAGE).click();
+    cy.contains(routes.TITLE_CONTENT_ARRAY_TEST_ID);
   });
 
   it('на роут "/stack"', () => {
-    cy.get(`[data-test-id="${constants.TEST_ID_CARD_STACK}"]`).click();
-    cy.contains(constants.TEST_ID_TITLE_STACK);
+    cy.get(routes.LINK_STACK_PAGE).click();
+    cy.contains(routes.TITLE_CONTENT_STACK_TEST_ID);
   });
 
   it('на роут "/queue"', () => {
-    cy.get(`[data-test-id="${constants.TEST_ID_CARD_QUEUE}"]`).click();
-    cy.contains(constants.TEST_ID_TITLE_QUEUE);
+    cy.get(routes.LINK_QUEUE_PAGE).click();
+    cy.contains(routes.TITLE_CONTENT_QUEUE_TEST_ID);
   });
 
   it('на роуте "/list"', () => {
-    cy.get(`[data-test-id="${constants.TEST_ID_CARD_LIST}"]`).click();
-    cy.contains(constants.TEST_ID_TITLE_LIST);
+    cy.get(routes.LINK_LIST_PAGE).click();
+    cy.contains(routes.TITLE_CONTENT_LINKED_LIST_TEST_ID);
   });
 });

@@ -5,10 +5,10 @@ import { Button } from '../ui/button/button';
 import { Circle } from '../ui/circle/circle';
 import { getFibonacciNumbers } from './utils/getFibonacciNumbers';
 import { sleep } from '../../helpers/sleep';
-import { INPUT_MAX_VALUE_FIBONACCI, INPUT_MIN_VALUE_FIBONACCI } from '../../constants/algorithmsRules';
+import { INPUT_MAX_VALUE_FIBONACCI, INPUT_MIN_VALUE_FIBONACCI } from '../../constants/algorithms-rules';
 import { DELAY_IN_MS } from '../../constants/delays';
+import { BUTTON_TEST_ID, INPUT_TEST_ID } from '../../constants/tests/fibonacci';
 import styles from './fibonacci-page.module.css';
-import { TEST_ID_FIB_BUTTON, TEST_ID_FIB_INPUT } from '../../constants/test';
 
 export const FibonacciPage = () => {
   const [value, setValue] = useState<string>('');
@@ -41,9 +41,12 @@ export const FibonacciPage = () => {
 
   return (
     <SolutionLayout title="Последовательность Фибоначчи">
-      <form className={ styles.form } onSubmit={ handleSubmit }>
+      <form
+        className={ styles.form }
+        onSubmit={ handleSubmit }
+      >
         <Input
-          data-test-id={TEST_ID_FIB_INPUT}
+          data-test-id={ INPUT_TEST_ID }
           value={ value }
           placeholder={ 'Введите число' }
           disabled={ isFormSubmitted }
@@ -55,7 +58,7 @@ export const FibonacciPage = () => {
           autoComplete={ 'off' }
         />
         <Button
-          data-test-id={TEST_ID_FIB_BUTTON}
+          data-test-id={ BUTTON_TEST_ID }
           type={ 'submit' }
           text={ 'Рассчитать' }
           isLoader={ isFormSubmitted }

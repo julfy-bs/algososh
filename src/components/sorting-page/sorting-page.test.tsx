@@ -3,7 +3,7 @@ import { sortWithSelection } from './utils/sortWithSelection';
 import { createRandomArray } from './utils/createRandomArray';
 import { Direction, SortElement } from '../../types/sort';
 import { ElementStates } from '../../types/element-states';
-import { RANDOM_ARRAY_MAX_LENGTH, RANDOM_ARRAY_MIN_LENGTH } from '../../constants/algorithmsRules';
+import { RANDOM_ARRAY_MAX_LENGTH, RANDOM_ARRAY_MIN_LENGTH } from '../../constants/algorithms-rules';
 
 describe('Создание массива работает корректно', () => {
   it('длина массива больше или равна значению константы', () => {
