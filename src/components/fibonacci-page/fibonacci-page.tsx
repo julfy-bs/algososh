@@ -41,12 +41,9 @@ export const FibonacciPage = () => {
 
   return (
     <SolutionLayout title="Последовательность Фибоначчи">
-      <form
-        className={ styles.form }
-        onSubmit={ handleSubmit }
-      >
+      <form className={ styles.form } onSubmit={ handleSubmit }>
         <Input
-          data-test-id={ INPUT_TEST_ID }
+          data-test-id={INPUT_TEST_ID}
           value={ value }
           placeholder={ 'Введите число' }
           disabled={ isFormSubmitted }
@@ -58,7 +55,7 @@ export const FibonacciPage = () => {
           autoComplete={ 'off' }
         />
         <Button
-          data-test-id={ BUTTON_TEST_ID }
+          data-test-id={BUTTON_TEST_ID}
           type={ 'submit' }
           text={ 'Рассчитать' }
           isLoader={ isFormSubmitted }

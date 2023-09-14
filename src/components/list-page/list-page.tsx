@@ -8,11 +8,24 @@ import { sleep } from '../../helpers/sleep';
 import { LinkedList, LinkedListNode } from './utils/linkedList';
 import { ElementStates, ElementStatesVariety } from '../../types/element-states';
 import { LinkedListState, LinkedListStateVariety } from '../../types/linked-list';
-import { INITIAL_ARRAY_LINKED_LIST, INPUT_MAX_LENGTH_LINKED_LIST, LIST_MAX_LENGTH_LINKED_LIST, LIST_MIN_INDEX_LINKED_LIST } from '../../constants/algorithms-rules';
+import {
+  INITIAL_ARRAY_LINKED_LIST,
+  INPUT_MAX_LENGTH_LINKED_LIST,
+  LIST_MAX_LENGTH_LINKED_LIST,
+  LIST_MIN_INDEX_LINKED_LIST,
+} from '../../constants/algorithms-rules';
 import { DELAY_IN_MS, SHORT_DELAY_IN_MS } from '../../constants/delays';
 import { COLOR_CHANGING, COLOR_DEFAULT } from '../../constants/colors';
 import { HEAD, TAIL } from '../../constants/element-captions';
 import styles from './list-page.module.css';
+import {
+  BUTTON_ADD_TO_HEAD_TEST_ID, BUTTON_ADD_TO_INDEX_TEST_ID,
+  BUTTON_ADD_TO_TAIL_TEST_ID,
+  BUTTON_REMOVE_FROM_HEAD_TEST_ID, BUTTON_REMOVE_FROM_INDEX_TEST_ID,
+  BUTTON_REMOVE_FROM_TAIL_TEST_ID,
+  INPUT_INDEX_TEST_ID,
+  INPUT_VALUE_TEST_ID,
+} from '../../constants/tests/linked-list';
 
 export const ListPage = () => {
   const [inputValue, setInputValue] = useState<string>('');
@@ -28,8 +41,8 @@ export const ListPage = () => {
 
   useEffect(() => {
     list.fromArray(initialArray);
-    const arrayFromLinkedList = list.toArray();
-    setArray(arrayFromLinkedList);
+    setArray(list.toArray());
+    return () => list.reset();
   }, []);
 
   const handleAddNewHead: ReactEventHandler<HTMLButtonElement> = async () => {
@@ -100,14 +113,14 @@ export const ListPage = () => {
     let i = 0;
     while (i <= addItemAtIndex) {
       setChangingIndex(i);
-      await sleep(SHORT_DELAY_IN_MS);
+      await sleep(DELAY_IN_MS);
       i++;
     }
     list.addByIndex(inputValue, addItemAtIndex);
     const arrayFromLinkedList = list.toArray();
     setArray(arrayFromLinkedList);
     setSolutionState(LinkedListStateVariety.Success);
-    await sleep(SHORT_DELAY_IN_MS);
+    await sleep(DELAY_IN_MS);
     setInputIndex('');
     setInputValue('');
     setIsIndexInSearch(false);
@@ -145,7 +158,7 @@ export const ListPage = () => {
   const setHead = (
     item: LinkedListNode<string>,
     index: number,
-    value: string
+    value: string,
   ) => {
     if (
       index === changingIndex
@@ -173,7 +186,7 @@ export const ListPage = () => {
 
   const setTail = (
     item: LinkedListNode<string>,
-    index: number
+    index: number,
   ) => {
     if (index === changingIndex &&
       (solutionState === LinkedListStateVariety.DeleteFromHead
@@ -196,10 +209,10 @@ export const ListPage = () => {
 
   const findCircleValue = (
     item: LinkedListNode<string>,
-    index: number
+    index: number,
   ) => {
     if (inputValue && index === changingIndex) {
-      return inputValue;
+      return item.value;
     }
     if (index === changingIndex) {
       return '';
@@ -212,6 +225,7 @@ export const ListPage = () => {
       <form className={ styles.form }>
         <fieldset className={ `${ styles.form_fieldset }` }>
           <Input
+            data-test-id={ INPUT_VALUE_TEST_ID }
             disabled={ isFormSubmitting || array.length >= LIST_MAX_LENGTH_LINKED_LIST }
             value={ inputValue }
             maxLength={ INPUT_MAX_LENGTH_LINKED_LIST }
@@ -221,6 +235,7 @@ export const ListPage = () => {
             placeholder={ 'Введите значение' }
           />
           <Button
+            data-test-id={ BUTTON_ADD_TO_HEAD_TEST_ID }
             disabled={ isFormSubmitting || !inputValue }
             isLoader={ solutionState === LinkedListStateVariety.AddToHead }
             type={ 'button' }
@@ -229,6 +244,7 @@ export const ListPage = () => {
             onClick={ handleAddNewHead }
           />
           <Button
+            data-test-id={ BUTTON_ADD_TO_TAIL_TEST_ID }
             disabled={ isFormSubmitting || !inputValue }
             isLoader={ solutionState === LinkedListStateVariety.AddToTail }
             type={ 'button' }
@@ -237,6 +253,7 @@ export const ListPage = () => {
             onClick={ handleAddNewTail }
           />
           <Button
+            data-test-id={ BUTTON_REMOVE_FROM_HEAD_TEST_ID }
             disabled={ isFormSubmitting || array.length <= 0 }
             isLoader={ solutionState === LinkedListStateVariety.DeleteFromHead }
             type={ 'button' }
@@ -245,6 +262,7 @@ export const ListPage = () => {
             onClick={ handleDeleteHead }
           />
           <Button
+            data-test-id={ BUTTON_REMOVE_FROM_TAIL_TEST_ID }
             disabled={ isFormSubmitting || array.length <= 0 }
             isLoader={ solutionState === LinkedListStateVariety.DeleteFromTail }
             type={ 'button' }
@@ -255,16 +273,20 @@ export const ListPage = () => {
         </fieldset>
         <fieldset className={ `${ styles.form_fieldset } ${ styles.form_fieldset_type_index }` }>
           <Input
+            data-test-id={ INPUT_INDEX_TEST_ID }
             disabled={ array.length === 0 || isFormSubmitting }
             value={ inputIndex }
             onChange={ (e) => setInputIndex(e.currentTarget.value) }
             min={ LIST_MIN_INDEX_LINKED_LIST }
-            max={ array.length > 1 ? array.length - 1 : ' 0 ' }
+            max={ array.length > 1
+              ? array.length - 1
+              : ' 0 ' }
             type={ 'number' }
             extraClass={ styles.form_input }
             placeholder={ 'Введите индекс' }
           />
           <Button
+            data-test-id={ BUTTON_ADD_TO_INDEX_TEST_ID }
             disabled={
               Number(inputIndex) < LIST_MIN_INDEX_LINKED_LIST
               || Number(inputIndex) >= array.length
@@ -281,6 +303,7 @@ export const ListPage = () => {
             onClick={ handleAddByIndex }
           />
           <Button
+            data-test-id={ BUTTON_REMOVE_FROM_INDEX_TEST_ID }
             disabled={
               Number(inputIndex) < LIST_MIN_INDEX_LINKED_LIST
               || Number(inputIndex) >= array.length

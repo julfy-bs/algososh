@@ -18,7 +18,7 @@ const removeCircle = (value: string): void => {
 
 const values: string[] = ['42', '422'];
 
-describe('', () => {
+describe('Страница визуализации алгоритма очереди', () => {
   beforeEach(() => {
     cy.visit(`${ TEST_URL }/queue`);
   });

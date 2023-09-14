@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { ReturnButton } from '../return-button/return-button';
 import { Link } from 'react-router-dom';
 import styles from './solution-layout.module.css';
@@ -6,7 +6,7 @@ import styles from './solution-layout.module.css';
 type SolutionLayoutProps = {
   title: string;
   extraClass?: string;
-  children?: JSX.Element[]
+  children?: ReactElement[]
 }
 
 export const SolutionLayout: React.FC<SolutionLayoutProps> = ({
