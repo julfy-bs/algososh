@@ -2,7 +2,9 @@
 
 exports[`Компонент <Button /> рендерится без ошибок без текста 1`] = `
 <button
-  className="text text_type_button text_color_primary button undefined false "
+  className="text text_type_button text_color_primary button 
+   
+   "
   type="button"
 >
   <p
@@ -13,7 +15,9 @@ exports[`Компонент <Button /> рендерится без ошибок 
 
 exports[`Компонент <Button /> рендерится без ошибок с заблокированной кнопкой 1`] = `
 <button
-  className="text text_type_button text_color_primary button undefined false "
+  className="text text_type_button text_color_primary button 
+   
+   "
   disabled={true}
   type="button"
 >
@@ -25,7 +29,9 @@ exports[`Компонент <Button /> рендерится без ошибок 
 
 exports[`Компонент <Button /> рендерится без ошибок с индикацией загрузки 1`] = `
 <button
-  className="text text_type_button text_color_primary button undefined loader "
+  className="text text_type_button text_color_primary button 
+   
+  loader "
   disabled={true}
   type="button"
 >
@@ -39,7 +45,9 @@ exports[`Компонент <Button /> рендерится без ошибок 
 
 exports[`Компонент <Button /> рендерится без ошибок с текстом 1`] = `
 <button
-  className="text text_type_button text_color_primary button undefined false "
+  className="text text_type_button text_color_primary button 
+   
+   "
   type="button"
 >
   <p

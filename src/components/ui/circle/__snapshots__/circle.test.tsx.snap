@@ -5,7 +5,15 @@ exports[`Компонент <Circle /> рендерится без ошибок 
   className="content "
 >
   <div
-    className="text text_type_input text_color_input mb-4 absolute head element"
+    className="
+          text
+          text_type_input
+          text_color_input
+          mb-4
+          absolute
+          head 
+          element
+        "
   />
   <div
     className="circle   default"
@@ -18,7 +26,15 @@ exports[`Компонент <Circle /> рендерится без ошибок 
     className="text text_type_input text_color_input mt-4 absolute index"
   />
   <div
-    className="text text_type_input text_color_input mt-4 absolute tail30 element"
+    className="
+          text
+          text_type_input
+          text_color_input
+          mt-4 
+          absolute
+          tail30 
+          element
+        "
   />
 </div>
 `;
@@ -28,7 +44,15 @@ exports[`Компонент <Circle /> рендерится без ошибок 
   className="content "
 >
   <div
-    className="text text_type_input text_color_input mb-4 absolute head element"
+    className="
+          text
+          text_type_input
+          text_color_input
+          mb-4
+          absolute
+          head 
+          element
+        "
   />
   <div
     className="circle   changing"
@@ -41,7 +65,15 @@ exports[`Компонент <Circle /> рендерится без ошибок 
     className="text text_type_input text_color_input mt-4 absolute index"
   />
   <div
-    className="text text_type_input text_color_input mt-4 absolute tail30 element"
+    className="
+          text
+          text_type_input
+          text_color_input
+          mt-4 
+          absolute
+          tail30 
+          element
+        "
   />
 </div>
 `;
@@ -51,7 +83,15 @@ exports[`Компонент <Circle /> рендерится без ошибок 
   className="content "
 >
   <div
-    className="text text_type_input text_color_input mb-4 absolute head element"
+    className="
+          text
+          text_type_input
+          text_color_input
+          mb-4
+          absolute
+          head 
+          element
+        "
   />
   <div
     className="circle   default"
@@ -64,7 +104,15 @@ exports[`Компонент <Circle /> рендерится без ошибок 
     className="text text_type_input text_color_input mt-4 absolute index"
   />
   <div
-    className="text text_type_input text_color_input mt-4 absolute tail30 element"
+    className="
+          text
+          text_type_input
+          text_color_input
+          mt-4 
+          absolute
+          tail30 
+          element
+        "
   />
 </div>
 `;
@@ -74,7 +122,15 @@ exports[`Компонент <Circle /> рендерится без ошибок 
   className="content "
 >
   <div
-    className="text text_type_input text_color_input mb-4 absolute head element"
+    className="
+          text
+          text_type_input
+          text_color_input
+          mb-4
+          absolute
+          head 
+          element
+        "
   />
   <div
     className="circle   modified"
@@ -87,7 +143,15 @@ exports[`Компонент <Circle /> рендерится без ошибок 
     className="text text_type_input text_color_input mt-4 absolute index"
   />
   <div
-    className="text text_type_input text_color_input mt-4 absolute tail30 element"
+    className="
+          text
+          text_type_input
+          text_color_input
+          mt-4 
+          absolute
+          tail30 
+          element
+        "
   />
 </div>
 `;
@@ -97,7 +161,15 @@ exports[`Компонент <Circle /> рендерится без ошибок 
   className="content "
 >
   <div
-    className="text text_type_input text_color_input mb-4 absolute head string"
+    className="
+          text
+          text_type_input
+          text_color_input
+          mb-4
+          absolute
+          head 
+          string
+        "
   >
     head
   </div>
@@ -112,7 +184,15 @@ exports[`Компонент <Circle /> рендерится без ошибок 
     className="text text_type_input text_color_input mt-4 absolute index"
   />
   <div
-    className="text text_type_input text_color_input mt-4 absolute tail30 element"
+    className="
+          text
+          text_type_input
+          text_color_input
+          mt-4 
+          absolute
+          tail30 
+          element
+        "
   />
 </div>
 `;
@@ -122,7 +202,15 @@ exports[`Компонент <Circle /> рендерится без ошибок 
   className="content "
 >
   <div
-    className="text text_type_input text_color_input mb-4 absolute head element"
+    className="
+          text
+          text_type_input
+          text_color_input
+          mb-4
+          absolute
+          head 
+          element
+        "
   />
   <div
     className="circle   default"
@@ -137,7 +225,15 @@ exports[`Компонент <Circle /> рендерится без ошибок 
     0
   </p>
   <div
-    className="text text_type_input text_color_input mt-4 absolute tail60 element"
+    className="
+          text
+          text_type_input
+          text_color_input
+          mt-4 
+          absolute
+          tail60 
+          element
+        "
   />
 </div>
 `;
@@ -147,13 +243,29 @@ exports[`Компонент <Circle /> рендерится без ошибок 
   className="content "
 >
   <div
-    className="text text_type_input text_color_input mb-4 absolute head element"
+    className="
+          text
+          text_type_input
+          text_color_input
+          mb-4
+          absolute
+          head 
+          element
+        "
   >
     <div
       className="content "
     >
       <div
-        className="text text_type_input text_color_input mb-4 absolute head element"
+        className="
+          text
+          text_type_input
+          text_color_input
+          mb-4
+          absolute
+          head 
+          element
+        "
       />
       <div
         className="circle  small default"
@@ -166,7 +278,15 @@ exports[`Компонент <Circle /> рендерится без ошибок 
         className="text text_type_input text_color_input mt-4 absolute index"
       />
       <div
-        className="text text_type_input text_color_input mt-4 absolute tail30 element"
+        className="
+          text
+          text_type_input
+          text_color_input
+          mt-4 
+          absolute
+          tail30 
+          element
+        "
       />
     </div>
   </div>
@@ -181,7 +301,15 @@ exports[`Компонент <Circle /> рендерится без ошибок 
     className="text text_type_input text_color_input mt-4 absolute index"
   />
   <div
-    className="text text_type_input text_color_input mt-4 absolute tail30 element"
+    className="
+          text
+          text_type_input
+          text_color_input
+          mt-4 
+          absolute
+          tail30 
+          element
+        "
   />
 </div>
 `;
@@ -191,7 +319,15 @@ exports[`Компонент <Circle /> рендерится без ошибок 
   className="content "
 >
   <div
-    className="text text_type_input text_color_input mb-4 absolute head element"
+    className="
+          text
+          text_type_input
+          text_color_input
+          mb-4
+          absolute
+          head 
+          element
+        "
   />
   <div
     className="circle   default"
@@ -204,13 +340,29 @@ exports[`Компонент <Circle /> рендерится без ошибок 
     className="text text_type_input text_color_input mt-4 absolute index"
   />
   <div
-    className="text text_type_input text_color_input mt-4 absolute tail30 element"
+    className="
+          text
+          text_type_input
+          text_color_input
+          mt-4 
+          absolute
+          tail30 
+          element
+        "
   >
     <div
       className="content "
     >
       <div
-        className="text text_type_input text_color_input mb-4 absolute head element"
+        className="
+          text
+          text_type_input
+          text_color_input
+          mb-4
+          absolute
+          head 
+          element
+        "
       />
       <div
         className="circle  small default"
@@ -223,7 +375,15 @@ exports[`Компонент <Circle /> рендерится без ошибок 
         className="text text_type_input text_color_input mt-4 absolute index"
       />
       <div
-        className="text text_type_input text_color_input mt-4 absolute tail30 element"
+        className="
+          text
+          text_type_input
+          text_color_input
+          mt-4 
+          absolute
+          tail30 
+          element
+        "
       />
     </div>
   </div>
@@ -235,7 +395,15 @@ exports[`Компонент <Circle /> рендерится без ошибок 
   className="content "
 >
   <div
-    className="text text_type_input text_color_input mb-4 absolute head element"
+    className="
+          text
+          text_type_input
+          text_color_input
+          mb-4
+          absolute
+          head 
+          element
+        "
   />
   <div
     className="circle   default"
@@ -248,7 +416,15 @@ exports[`Компонент <Circle /> рендерится без ошибок 
     className="text text_type_input text_color_input mt-4 absolute index"
   />
   <div
-    className="text text_type_input text_color_input mt-4 absolute tail30 string"
+    className="
+          text
+          text_type_input
+          text_color_input
+          mt-4 
+          absolute
+          tail30 
+          string
+        "
   >
     tail
   </div>
@@ -260,7 +436,15 @@ exports[`Компонент <Circle /> рендерится без ошибок 
   className="content "
 >
   <div
-    className="text text_type_input text_color_input mb-4 absolute head element"
+    className="
+          text
+          text_type_input
+          text_color_input
+          mb-4
+          absolute
+          head 
+          element
+        "
   />
   <div
     className="circle   default"
@@ -275,7 +459,15 @@ exports[`Компонент <Circle /> рендерится без ошибок 
     className="text text_type_input text_color_input mt-4 absolute index"
   />
   <div
-    className="text text_type_input text_color_input mt-4 absolute tail30 element"
+    className="
+          text
+          text_type_input
+          text_color_input
+          mt-4 
+          absolute
+          tail30 
+          element
+        "
   />
 </div>
 `;
@@ -285,7 +477,15 @@ exports[`Компонент <Circle /> рендерится без ошибок 
   className="content "
 >
   <div
-    className="text text_type_input text_color_input mb-4 absolute head element"
+    className="
+          text
+          text_type_input
+          text_color_input
+          mb-4
+          absolute
+          head 
+          element
+        "
   />
   <div
     className="circle  small default"
@@ -298,7 +498,15 @@ exports[`Компонент <Circle /> рендерится без ошибок 
     className="text text_type_input text_color_input mt-4 absolute index"
   />
   <div
-    className="text text_type_input text_color_input mt-4 absolute tail30 element"
+    className="
+          text
+          text_type_input
+          text_color_input
+          mt-4 
+          absolute
+          tail30 
+          element
+        "
   />
 </div>
 `;
