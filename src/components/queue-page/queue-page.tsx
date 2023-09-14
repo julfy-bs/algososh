@@ -8,10 +8,16 @@ import { Queue } from './utils/queue';
 import { ElementStates, ElementStatesVariety } from '../../types/element-states';
 import { QueueSettings } from '../../types/queue';
 import { SolutionState, SolutionStateVariety } from '../../types/solution';
+import styles from './queue-page.module.css';
 import { DELAY_IN_MS } from '../../constants/delays';
 import { INPUT_MAX_LENGTH_QUEUE, ARRAY_DEFAULT_SIZE_QUEUE } from '../../constants/algorithms-rules';
-import styles from './queue-page.module.css';
 import { HEAD, TAIL } from '../../constants/element-captions';
+import {
+  BUTTON_ADD_TEST_ID,
+  BUTTON_CLEAR_TEST_ID,
+  BUTTON_REMOVE_TEST_ID,
+  INPUT_TEST_ID
+} from '../../constants/tests/queue';
 
 export const QueuePage = () => {
   const [value, setValue] = useState<string>('');
@@ -30,13 +36,13 @@ export const QueuePage = () => {
       ...queueSettings,
       array: queue.getElements()
     });
-  }, [queue, queueSettings]);
+  }, []);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e): void => {
     setValue(e.currentTarget.value);
   };
 
-  const handleAddToStack: FormEventHandler<HTMLFormElement> = async (e): Promise<void> => {
+  const handleAddToQueue: FormEventHandler<HTMLFormElement> = async (e): Promise<void> => {
     e.preventDefault();
     setIsFormSubmitting(true);
     setSolutionState(SolutionStateVariety.Add);
@@ -48,7 +54,7 @@ export const QueuePage = () => {
     setIsFormSubmitting(false);
   };
 
-  const handleDeleteFromStack: ReactEventHandler<HTMLButtonElement> = async (): Promise<void> => {
+  const handleDeleteFromQueue: ReactEventHandler<HTMLButtonElement> = async (): Promise<void> => {
     setIsFormSubmitting(true);
     setSolutionState(SolutionStateVariety.Delete);
     await sleep(DELAY_IN_MS);
@@ -83,9 +89,13 @@ export const QueuePage = () => {
 
   return (
     <SolutionLayout title="Очередь">
-      <form className={ styles.form } onSubmit={ handleAddToStack }>
+      <form
+        className={ styles.form }
+        onSubmit={ handleAddToQueue }
+      >
         <fieldset className={ `${ styles.form_fieldset } ${ styles.form_fieldset_type_input }` }>
           <Input
+            data-test-id={ INPUT_TEST_ID }
             disabled={ isFormSubmitting || queueSize === queue.getLength() }
             value={ value }
             maxLength={ INPUT_MAX_LENGTH_QUEUE }
@@ -94,6 +104,7 @@ export const QueuePage = () => {
         </fieldset>
         <fieldset className={ `${ styles.form_fieldset } ${ styles.form_fieldset_type_button }` }>
           <Button
+            data-test-id={ BUTTON_ADD_TEST_ID }
             disabled={ isFormSubmitting || !value || queueSize === queue.getLength() }
             isLoader={ solutionState === SolutionStateVariety.Add }
             type={ 'submit' }
@@ -101,14 +112,16 @@ export const QueuePage = () => {
             extraClass={ `${ styles.form_button } mr-3` }
           />
           <Button
+            data-test-id={ BUTTON_REMOVE_TEST_ID }
             disabled={ queue.getLength() === 0 }
             isLoader={ solutionState === SolutionStateVariety.Delete }
             type={ 'button' }
             text={ 'Удалить' }
             extraClass={ styles.form_button }
-            onClick={ handleDeleteFromStack }
+            onClick={ handleDeleteFromQueue }
           />
           <Button
+            data-test-id={ BUTTON_CLEAR_TEST_ID }
             disabled={ queue.getLength() === 0 }
             isLoader={ solutionState === SolutionStateVariety.Clear }
             type={ 'button' }

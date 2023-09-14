@@ -1,8 +1,7 @@
-import { TEST_URL } from '../../src/constants/tests/general';
-import { SHORT_DELAY_IN_MS } from '../../src/constants/delays';
 import * as stack from '../../src/constants/tests/stack';
 import * as circle from '../../src/constants/tests/circle';
-
+import { TEST_URL } from '../../src/constants/tests/general';
+import { SHORT_DELAY_IN_MS } from '../../src/constants/delays';
 const addCircle = (value: string) => {
   cy.get(stack.inputElement).type(value).should('have.value', value);
   cy.get(stack.buttonAddElement).should('not.be.disabled').click();
@@ -23,7 +22,7 @@ const removeCircle = (value: string, length: number) => {
     });
 };
 
-const values = ['1', '2'];
+const values: string[] = ['1', '2'];
 
 describe('Страница визуализации алгоритма стэка', () => {
 
@@ -32,9 +31,7 @@ describe('Страница визуализации алгоритма стэк�
   });
 
   afterEach(() => {
-    cy.get(stack.inputElement)
-      .clear()
-      .should('be.empty');
+    cy.get(stack.inputElement).clear().should('be.empty');
   });
 
   it('Кнопка добавления должна быть заблокирована при пустом инпуте', () => {
