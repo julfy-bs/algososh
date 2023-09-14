@@ -26,21 +26,21 @@ export const MainPage: React.FC<MainPageProps> = ({ extraClass = '' }) => {
         className={ styles.cards_box }
       >
         <Link
-          data-test-id={ testingConstants.LINK_HOMEPAGE_TEST_ID }
+          data-test-id={ testingConstants.LINK_STRING_PAGE_TEST_ID }
           className={ styles.link }
           to="/recursion"
         >
           <div className={ `${ styles.card } ${ styles.string }` } />
         </Link>
         <Link
-          data-test-id={ testingConstants.LINK_STRING_PAGE_TEST_ID }
+          data-test-id={ testingConstants.LINK_FIBONACCI_PAGE_TEST_ID }
           className={ styles.link }
           to="/fibonacci"
         >
           <div className={ `${ styles.card } ${ styles.fibonacci }` } />
         </Link>
         <Link
-          data-test-id={ testingConstants.LINK_FIBONACCI_PAGE_TEST_ID }
+          data-test-id={ testingConstants.LINK_ARRAY_PAGE_TEST_ID }
           className={ styles.link }
           to="/sorting"
         >
