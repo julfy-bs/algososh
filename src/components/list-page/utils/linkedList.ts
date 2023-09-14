@@ -225,4 +225,9 @@ export class LinkedList<T> implements LinkedListClass<T> {
     // Возвращаем массив из всех узлов.
     return nodes;
   }
+
+  reset(): void {
+    this.head = null;
+    this.tail = null;
+  }
 }
