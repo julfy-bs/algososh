@@ -27,7 +27,7 @@ describe('Страница визуализации алгоритма стро�
     cy.get(string.buttonElement).should('not.be.disabled');
   });
 
-  it('Анимация выполняется корректно', () => {
+  it('Анимация выполняется корректно cо строкой с четным количеством символов', () => {
     cy.get(string.inputElement).type('string');
     cy.get(string.buttonElement).click();
 
@@ -121,6 +121,69 @@ describe('Страница визуализации алгоритма стро�
         if (index === 4) expect(el).to.contain('t');
         if (index === 5) expect(el).to.contain('s');
 
+      });
+  });
+
+  it('Анимация выполняется корректно cо строкой с нечетным количеством символов', () => {
+    cy.get(string.inputElement).type('hit');
+    cy.get(string.buttonElement).click();
+
+    cy.get(circle.Circle).as('circle');
+
+    cy.get('@circle')
+      .each((el: Element, index: number) => {
+        if (index === 0 || index === 2) {
+          cy.wrap(el).should(
+            'have.css',
+            'border',
+            `4px solid ${ hexToRgb(COLOR_CHANGING) }`
+          );
+        }
+        if (index > 0 && index < 2) {
+          cy.wrap(el).should(
+            'have.css',
+            'border',
+            `4px solid ${ hexToRgb(COLOR_DEFAULT) }`
+          );
+        }
+        if (index === 0) expect(el).to.contain('h');
+        if (index === 5) expect(el).to.contain('t');
+      });
+
+    cy.wait(DELAY_IN_MS);
+
+    cy.get('@circle')
+      .each((el: Element, index: number) => {
+        if (index < 1 || index > 1) {
+          cy.wrap(el).should(
+            'have.css',
+            'border',
+            `4px solid ${ hexToRgb(COLOR_MODIFIED) }`
+          );
+        }
+        if (index === 1) {
+          cy.wrap(el).should(
+            'have.css',
+            'border',
+            `4px solid ${ hexToRgb(COLOR_CHANGING) }`
+          );
+        }
+        if (index === 1) expect(el).to.contain('i');
+      });
+
+    cy.wait(DELAY_IN_MS);
+
+    cy.get('@circle')
+      .each((el: Element, index: number) => {
+        cy.wrap(el).should(
+          'have.css',
+          'border',
+          `4px solid ${ hexToRgb(COLOR_MODIFIED) }`
+        );
+
+        if (index === 0) expect(el).to.contain('t');
+        if (index === 1) expect(el).to.contain('i');
+        if (index === 2) expect(el).to.contain('h');
       });
   });
 });
