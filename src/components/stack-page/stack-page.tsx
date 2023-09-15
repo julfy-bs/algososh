@@ -9,9 +9,15 @@ import { Stack } from './utils/stack';
 import { SolutionState, SolutionStateVariety } from '../../types/solution';
 import { StackSettings } from '../../types/stack';
 import { DELAY_IN_MS } from '../../constants/delays';
-import { INPUT_MAX_LENGTH_STACK } from '../../constants/algorithmsRules';
+import { INPUT_MAX_LENGTH_STACK } from '../../constants/algorithms-rules';
 import { TOP } from '../../constants/element-captions';
 import styles from './stack-page.module.css';
+import {
+  BUTTON_ADD_TEST_ID,
+  BUTTON_CLEAR_TEST_ID,
+  BUTTON_REMOVE_TEST_ID,
+  INPUT_TEST_ID
+} from '../../constants/tests/stack';
 
 export const StackPage = () => {
   const [value, setValue] = useState<string>('');
@@ -75,9 +81,13 @@ export const StackPage = () => {
 
   return (
     <SolutionLayout title="Стек">
-      <form className={ styles.form } onSubmit={ handleAddToStack }>
+      <form
+        className={ styles.form }
+        onSubmit={ handleAddToStack }
+      >
         <fieldset className={ `${ styles.form_fieldset } ${ styles.form_fieldset_type_input }` }>
           <Input
+            data-test-id={ INPUT_TEST_ID }
             disabled={ isFormSubmitting }
             value={ value }
             maxLength={ INPUT_MAX_LENGTH_STACK }
@@ -86,6 +96,7 @@ export const StackPage = () => {
         </fieldset>
         <fieldset className={ `${ styles.form_fieldset } ${ styles.form_fieldset_type_button }` }>
           <Button
+            data-test-id={ BUTTON_ADD_TEST_ID }
             disabled={ !value }
             isLoader={ solutionState === SolutionStateVariety.Add }
             type={ 'submit' }
@@ -93,6 +104,7 @@ export const StackPage = () => {
             extraClass={ `${ styles.form_button } mr-3` }
           />
           <Button
+            data-test-id={ BUTTON_REMOVE_TEST_ID }
             disabled={ !isCircleVisible }
             isLoader={ solutionState === SolutionStateVariety.Delete }
             type={ 'button' }
@@ -101,6 +113,7 @@ export const StackPage = () => {
             onClick={ handleDeleteFromStack }
           />
           <Button
+            data-test-id={ BUTTON_CLEAR_TEST_ID }
             disabled={ !isCircleVisible }
             isLoader={ solutionState === SolutionStateVariety.Clear }
             type={ 'button' }
@@ -121,7 +134,8 @@ export const StackPage = () => {
                 index={ index }
                 head={ stackSettings.array.length - 1 === index
                   ? TOP
-                  : '' }/>
+                  : '' }
+              />
             ))
             : <></>
         }

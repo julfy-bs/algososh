@@ -4,11 +4,11 @@ import { SolutionLayout } from '../ui/solution-layout/solution-layout';
 import { Input } from '../ui/input/input';
 import { Circle } from '../ui/circle/circle';
 import { Button } from '../ui/button/button';
-import { changeCircleColor } from './utils';
-import { sleep } from '../../helpers/sleep';
-import { swap } from '../../helpers/swap';
-import { INPUT_MAX_LENGTH_STRING } from '../../constants/algorithmsRules';
+import { changeCircleColor } from './utils/changeCircleColor';
+import { reverseString } from './utils/reverseString';
 import { DELAY_IN_MS } from '../../constants/delays';
+import { INPUT_MAX_LENGTH_STRING } from '../../constants/algorithms-rules';
+import { BUTTON_TEST_ID, INPUT_TEST_ID } from '../../constants/tests/string';
 
 export const StringComponent = () => {
   const [value, setValue] = useState<string>('');
@@ -19,7 +19,6 @@ export const StringComponent = () => {
 
   const [pointerFirst, setPointerFirst] = useState<number>(0);
   const [pointerSecond, setPointerSecond] = useState<number>(0);
-
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const target = e.currentTarget.value;
@@ -35,17 +34,13 @@ export const StringComponent = () => {
     setIsFormSubmitted(true);
     setIsCircleVisible(true);
     setValue('');
-    let start = 0;
-    let end = valuesArray.length - 1;
-    while (start < end) {
-      setPointerFirst(start);
-      setPointerSecond(end);
-      await sleep(DELAY_IN_MS);
-      swap(valuesArray, start, end);
-      setValuesArray(valuesArray);
-      start++;
-      end--;
-    }
+    await reverseString(
+      valuesArray,
+      setValuesArray,
+      setPointerFirst,
+      setPointerSecond,
+      DELAY_IN_MS
+    );
     setPointerFirst(valuesArray.length);
     setPointerSecond(valuesArray.length);
     setIsFormSubmitted(false);
@@ -53,8 +48,12 @@ export const StringComponent = () => {
 
   return (
     <SolutionLayout title="Строка">
-      <form className={ styles.form } onSubmit={ handleSubmit }>
+      <form
+        className={ styles.form }
+        onSubmit={ handleSubmit }
+      >
         <Input
+          data-test-id={ INPUT_TEST_ID }
           value={ value }
           disabled={ isFormSubmitted }
           maxLength={ INPUT_MAX_LENGTH_STRING }
@@ -64,6 +63,7 @@ export const StringComponent = () => {
           autoComplete={ 'off' }
         />
         <Button
+          data-test-id={ BUTTON_TEST_ID }
           type={ 'submit' }
           text={ 'Развернуть' }
           isLoader={ isFormSubmitted }

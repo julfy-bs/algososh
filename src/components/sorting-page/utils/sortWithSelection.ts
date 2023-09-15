@@ -4,9 +4,9 @@ import { swap } from '../../../helpers/swap';
 import { changeColor } from './changeColor';
 
 export const sortWithSelection = ({
-                                    array,
-                                    direction
-                                  }: Omit<SortOptions, 'type'>): SortElement[][] => {
+  array,
+  direction
+}: Omit<SortOptions, 'type'>): SortElement[][] => {
   let copyArray: SortElement[] = [...array];
   let arraySortingMap: SortElement[][] = [];
   const { length } = copyArray;
